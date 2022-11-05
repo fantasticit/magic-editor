@@ -1,1 +1,0 @@
-/*! For license information please see excalidraw.production.min.js.LICENSE.txt */

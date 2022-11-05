@@ -27,3 +27,4 @@ tests/cypress/videos
 # Ignore intellij project files
 .idea
 preview
+storybook-static
