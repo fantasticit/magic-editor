@@ -1,0 +1,12 @@
+export declare const PARSE_HTML_PRIORITY_LOWEST = 1;
+export declare const PARSE_HTML_PRIORITY_DEFAULT = 50;
+export declare const PARSE_HTML_PRIORITY_HIGHEST = 100;
+export declare const EXTENSION_PRIORITY_LOWER = 75;
+export declare const EXTENSION_PRIORITY_DEFAULT = 100;
+export declare const EXTENSION_PRIORITY_HIGHEST = 200;
+export declare const ZINDEX_DEFAULT = 10;
+export declare const ZINDEX_MIDDLE = 1500;
+export declare const ZINDEX_HIGHEST = 10000;
+export declare const MIN_ZOOM = 0.1;
+export declare const MAX_ZOOM = 2;
+export declare const ZOOM_STEP = 0.15;

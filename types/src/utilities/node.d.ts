@@ -1,0 +1,15 @@
+import { Editor } from "@tiptap/core";
+import { EditorState } from "prosemirror-state";
+import { Node } from "prosemirror-model";
+export declare function getCurrentNode(state: EditorState): Node | null;
+export declare function getNodeAtPos(state: EditorState, pos: number): Node | null;
+export declare function isNodeActive(editor: Editor, extensionName: string): boolean;
+export declare function isInCustomNode(state: EditorState, nodeName: string): boolean;
+export declare function isInCodeBlock(state: EditorState): boolean;
+export declare function isInTitle(state: EditorState): boolean;
+export declare function isInCallout(state: EditorState): boolean;
+export declare function isTitleNode(node: Node): boolean;
+export declare function isBulletListNode(node: Node): boolean;
+export declare function isOrderedListNode(node: Node): boolean;
+export declare function isTodoListNode(node: Node): boolean;
+export declare function isListNode(node: Node): boolean;
