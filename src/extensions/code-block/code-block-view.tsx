@@ -36,7 +36,7 @@ export const CodeBlockView: React.FC<NodeViewProps> = ({
         label: "auto",
         value: "auto"
       },
-      ...extension.options.lowlight.listLanguages().map((lang: string) => ({
+      ...(extension?.options?.lowlight?.listLanguages?.() || []).map((lang: string) => ({
         label: lang,
         value: lang
       }))
