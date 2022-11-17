@@ -22,6 +22,7 @@ export interface PlaceholderOptions {
   showOnlyWhenEditable: boolean;
   showOnlyCurrent: boolean;
   includeChildren: boolean;
+  maxContentSize?: number;
 }
 
 export const Placeholder = Extension.create<PlaceholderOptions>({
@@ -34,7 +35,8 @@ export const Placeholder = Extension.create<PlaceholderOptions>({
       placeholder: "Write something …",
       showOnlyWhenEditable: true,
       showOnlyCurrent: true,
-      includeChildren: true
+      includeChildren: true,
+      maxContentSize: 2000,
     };
   },
 
@@ -47,12 +49,18 @@ export const Placeholder = Extension.create<PlaceholderOptions>({
           decorations: ({ doc, selection }) => {
             const active =
               this.editor.isEditable || !this.options.showOnlyWhenEditable;
-            const { anchor } = selection;
-            const decorations: Decoration[] = [];
+
+            if (doc.content.size > (this.options.maxContentSize || 2000)) {
+              console.log('目前文档内容较多，为了保证体验，placeholder 插件将不再工作。')
+              return null
+            }
 
             if (!active) {
               return null;
             }
+
+            const { anchor } = selection;
+            const decorations: Decoration[] = [];
 
             doc.descendants((node, pos) => {
               const hasAnchor = anchor >= pos && anchor <= pos + node.nodeSize;
