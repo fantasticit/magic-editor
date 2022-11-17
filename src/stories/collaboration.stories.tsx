@@ -63,7 +63,7 @@ import { Dragable } from "../extensions/dragable";
 
 import { Mention } from "../extensions/mention";
 
-import { Slash } from "../extensions/slash";
+import { createSlash, SlashMenuItem } from "../extensions/slash";
 
 import { FullContent } from "./content";
 
@@ -134,12 +134,13 @@ const userProvider = {
   }
 };
 const fileProvider = {
+  // @ts-ignore
   uploadFile(file) {
     return readImage(file);
   }
 };
 
-const Commands = [
+const Commands: SlashMenuItem[] = [
   {
     divider: true,
     title: "标题"
@@ -253,21 +254,22 @@ const FullExtensions = [
   Mind,
   Flow,
 
-  Slash.configure({
+  createSlash('slash-/', {
+    char: '/',
     pluginKey: "slash-/",
-    items: Commands as any
+    items: Commands
   }),
 
-  Slash.configure({
+  createSlash('slash-、', {
     char: "、",
     pluginKey: "slash-、",
-    items: Commands as any
+    items: Commands
   }),
 
-  Slash.configure({
+  createSlash('slash-\\', {
     char: "\\",
     pluginKey: "slash-\\",
-    items: Commands as any
+    items: Commands
   }),
 
   Placeholder.configure({
