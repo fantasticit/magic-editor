@@ -21,7 +21,7 @@ export const Columns = Node.create({
   defining: true,
   isolating: true,
   allowGapCursor: false,
-  content: "column+",
+  content: "column{2,}",
 
   addOptions() {
     return {
