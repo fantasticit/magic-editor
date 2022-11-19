@@ -106,7 +106,6 @@ const _ExcalidrawView: React.FC<NodeViewProps> = ({
   useEffect(() => {
     import("@excalidraw/excalidraw")
       .then(res => {
-        console.log(res);
         // @ts-ignore
         exportToSvgRef.current = res.exportToSvg;
       })

@@ -51,7 +51,6 @@ export const Placeholder = Extension.create<PlaceholderOptions>({
               this.editor.isEditable || !this.options.showOnlyWhenEditable;
 
             if (doc.content.size > (this.options.maxContentSize || 2000)) {
-              console.log('目前文档内容较多，为了保证体验，placeholder 插件将不再工作。')
               return null
             }
 
