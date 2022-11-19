@@ -35,39 +35,43 @@ function getDecorations({
   doc,
   name,
   lowlight,
-  defaultLanguage
+  defaultLanguage,
+  maxTextLength
 }: {
   doc: ProsemirrorNode;
   name: string;
   lowlight: any;
   defaultLanguage: string | null | undefined;
+  maxTextLength: number,
 }) {
   const decorations: Decoration[] = [];
 
   findChildren(doc, node => node.type.name === name).forEach(block => {
-    let from = block.pos + 1;
-    const language = block.node.attrs.language || defaultLanguage;
-    const languages = lowlight.listLanguages();
-    const nodes =
-      language && languages.includes(language)
-        ? getHighlightNodes(
-            lowlight.highlight(language, block.node.textContent)
-          )
-        : getHighlightNodes(lowlight.highlightAuto(block.node.textContent));
+    if (block.node.nodeSize <= maxTextLength) {
+      let from = block.pos + 1;
+      const language = block.node.attrs.language || defaultLanguage;
+      const languages = lowlight.listLanguages();
+      const nodes =
+        language && languages.includes(language)
+          ? getHighlightNodes(
+              lowlight.highlight(language, block.node.textContent)
+            )
+          : getHighlightNodes(lowlight.highlightAuto(block.node.textContent));
 
-    parseNodes(nodes).forEach(node => {
-      const to = from + node.text.length;
+      parseNodes(nodes).forEach(node => {
+        const to = from + node.text.length;
 
-      if (node.classes.length) {
-        const decoration = Decoration.inline(from, to, {
-          class: node.classes.join(" ")
-        });
+        if (node.classes.length) {
+          const decoration = Decoration.inline(from, to, {
+            class: node.classes.join(" ")
+          });
 
-        decorations.push(decoration);
-      }
+          decorations.push(decoration);
+        }
 
-      from = to;
-    });
+        from = to;
+      });
+    }
   });
 
   return DecorationSet.create(doc, decorations);
@@ -80,11 +84,13 @@ function isFunction(param: Function) {
 export function LowlightPlugin({
   name,
   lowlight,
-  defaultLanguage
+  defaultLanguage,
+  maxTextLength
 }: {
   name: string;
   lowlight: any;
   defaultLanguage: string | null | undefined;
+  maxTextLength: number
 }) {
   if (
     !["highlight", "highlightAuto", "listLanguages"].every(api =>
@@ -105,7 +111,8 @@ export function LowlightPlugin({
           doc,
           name,
           lowlight,
-          defaultLanguage
+          defaultLanguage,
+          maxTextLength
         }),
       apply: (transaction, decorationSet, oldState, newState) => {
         const oldNodeName = oldState.selection.$head.parent.type.name;
@@ -152,7 +159,8 @@ export function LowlightPlugin({
             doc: transaction.doc,
             name,
             lowlight,
-            defaultLanguage
+            defaultLanguage,
+            maxTextLength
           });
         }
 

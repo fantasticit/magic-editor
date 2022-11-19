@@ -13,6 +13,7 @@ import { CodeBlockView } from "./code-block-view";
 interface CodeBlockLowlightOptions extends CodeBlockOptions {
   lowlight: any;
   defaultLanguage: string | null | undefined;
+  maxTextLength?: number
 }
 
 export const CodeBlock = BuiltInCodeBlock.extend<CodeBlockLowlightOptions>({
@@ -23,7 +24,8 @@ export const CodeBlock = BuiltInCodeBlock.extend<CodeBlockLowlightOptions>({
     return {
       ...this.parent?.(),
       lowlight: {},
-      defaultLanguage: null
+      defaultLanguage: null,
+      maxTextLength: 200
     };
   },
 
@@ -38,7 +40,8 @@ export const CodeBlock = BuiltInCodeBlock.extend<CodeBlockLowlightOptions>({
       LowlightPlugin({
         name: this.name,
         lowlight: this.options.lowlight,
-        defaultLanguage: this.options.defaultLanguage
+        defaultLanguage: this.options.defaultLanguage,
+        maxTextLength: this.options.maxTextLength || 200,
       })
     ];
   },
