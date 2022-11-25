@@ -1,17 +1,18 @@
 import React from "react";
 import { Spin } from "@douyinfe/semi-ui";
 
-const LoadingWrapStyle = {
-  height: 32,
+const LoadingWrapStyle: React.CSSProperties = {
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
+  flexDirection: "column"
 };
 
-export const Loading = () => {
+export const Loading = ({ text }: { text?: string }) => {
   return (
     <div style={LoadingWrapStyle}>
-      <Spin></Spin>
+      <Spin spinning></Spin>
+      <p style={{ marginTop: "1em" }}>{text}</p>
     </div>
   );
 };

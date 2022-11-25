@@ -1,3 +1,4 @@
+import { Fragment, Node } from "prosemirror-model";
 import {
   PMNode,
   EditorState,

@@ -1,6 +1,7 @@
 import { AnyExtension, Node } from "@tiptap/core";
 
 import { Focus } from "../extensions/focus";
+import { Loading } from "../extensions/loading";
 import { Paragraph } from "../extensions/paragraph";
 import { Text } from "../extensions/text";
 import { HardBreak } from "../extensions/hard-break";
@@ -26,6 +27,7 @@ export const resolveEditorKit = (props: EditorKit) => {
     Text,
     HardBreak,
     Focus,
+    Loading,
     TrailingNode,
     ...extensions.flat()
   ];
