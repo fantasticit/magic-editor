@@ -1,9 +1,12 @@
 import { mergeAttributes, Node, nodeInputRule } from "@tiptap/core";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 
+import { NodeSelection } from "../../prosemirror";
+import { isNodeEmpty } from "../../utilities";
+
 import { ExcalidrawView } from "./excalidraw-view";
 
-const DEFAULT_MIND_DATA = JSON.stringify({ elements: [] });
+export const DEFAULT_EXCALIDRAW_DATA = JSON.stringify({ elements: [] });
 
 export interface IExcalidrawAttrs {
   createUserId?: string | number;
@@ -16,7 +19,7 @@ export interface IExcalidrawAttrs {
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     excalidraw: {
-      setExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
+      insertExcalidraw: (attrs?: IExcalidrawAttrs) => ReturnType;
     };
   }
 }
@@ -44,7 +47,7 @@ export const Excalidraw = Node.create({
         default: 240
       },
       data: {
-        default: DEFAULT_MIND_DATA
+        default: DEFAULT_EXCALIDRAW_DATA
       }
     };
   },
@@ -74,9 +77,11 @@ export const Excalidraw = Node.create({
 
   addCommands() {
     return {
-      setExcalidraw: attrs => ({ tr, commands, chain, state }) => {
+      insertExcalidraw: attrs => ({ tr, commands, chain, state }) => {
         attrs = attrs || {};
-        attrs.data = attrs.data || DEFAULT_MIND_DATA;
+        attrs.data = attrs.data || DEFAULT_EXCALIDRAW_DATA;
+
+        attrs = attrs || {};
 
         // @ts-ignore
         if (tr.selection?.node?.type?.name == this.name) {
@@ -84,42 +89,26 @@ export const Excalidraw = Node.create({
         }
 
         const { selection } = state;
-        const { empty } = selection;
-        const head = selection.$head;
+        const currentNode = selection.$head.node(selection.$head.depth);
+        const isEmpty = currentNode ? isNodeEmpty(currentNode) : true;
+        const insertPos = !isEmpty
+          ? state.tr.selection.from + 1
+          : state.tr.selection.from - 1;
 
-        if (empty) {
-          return chain()
-            .insertContent({
-              type: this.name,
-              attrs
-            })
-            .run();
-        } else {
-          const node = head.node(head.depth);
+        return chain()
+          .command(({ tr, dispatch, state }) => {
+            if (dispatch) {
+              tr.insert(
+                insertPos,
+                state.schema.nodes[this.name].create(attrs)
+              ).setSelection(NodeSelection.create(tr.doc, insertPos));
 
-          if (node.type.name === state.schema.topNodeType.name) {
-            return chain()
-              .command(({ tr, dispatch, state }) => {
-                if (dispatch) {
-                  tr.replaceSelectionWith(
-                    state.schema.nodes[this.name].create(attrs)
-                  ).scrollIntoView();
-                }
+              dispatch(tr);
+            }
 
-                return true;
-              })
-              .run();
-          }
-
-          return chain()
-            .insertContentAt(head.after(), [
-              {
-                type: this.name,
-                attrs
-              }
-            ])
-            .run();
-        }
+            return true;
+          })
+          .run();
       }
     };
   },

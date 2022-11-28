@@ -119,11 +119,7 @@ const _ExcalidrawView: React.FC<NodeViewProps> = ({
 
       // @ts-ignore
       const svg: SVGElement = await exportToSvgRef.current(JSON.parse(data));
-
-      svg.setAttribute("width", "100%");
-      svg.setAttribute("height", "100%");
       svg.setAttribute("display", "block");
-
       setSvg(svgToDataURI(svg?.outerHTML));
     };
 
@@ -162,7 +158,6 @@ const _ExcalidrawView: React.FC<NodeViewProps> = ({
                 style={{
                   height: "100%",
                   maxHeight: "100%",
-                  overflow: "hidden",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",

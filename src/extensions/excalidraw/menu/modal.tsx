@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 import { Modal, Loading, Button, Space } from "../../../components";
 import { IconExcalidraw } from "../../../icons";
+import { findNodeByBlockId } from "../../../utilities";
+
+import { Excalidraw as ExcalidrawExtension } from "../excalidraw";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -36,12 +39,14 @@ type IProps = {
     appState: { isLoading: false };
     files: null;
   } | null;
+  blockId: string;
   onClose: () => void;
 };
 
 export const ExcalidrawSettingModal: React.FC<IProps> = ({
   editor,
   data: outInData,
+  blockId,
   onClose
 }) => {
   const [Excalidraw, setExcalidraw] = useState(null);
@@ -93,12 +98,35 @@ export const ExcalidrawSettingModal: React.FC<IProps> = ({
       return;
     }
 
-    editor
-      .chain()
-      .focus()
-      .setExcalidraw({ data: JSON.stringify(data) })
-      .run();
-  }, [Excalidraw, editor, data, toggleVisible, onClose]);
+    let done = false;
+
+    if (blockId) {
+      const maybeNode = findNodeByBlockId(
+        editor.state,
+        ExcalidrawExtension.name,
+        blockId
+      );
+
+      if (maybeNode) {
+        editor.commands.command(({ tr }) => {
+          tr.setNodeMarkup(maybeNode.pos, undefined, {
+            ...maybeNode.node.attrs,
+            data: JSON.stringify(data)
+          });
+          return true;
+        });
+        done = true;
+      }
+    }
+
+    if (!done) {
+      editor
+        .chain()
+        .focus()
+        .insertExcalidraw({ data: JSON.stringify(data) })
+        .run();
+    }
+  }, [Excalidraw, editor, data, toggleVisible, onClose, blockId]);
 
   const saveAndExit = useCallback(() => {
     save();

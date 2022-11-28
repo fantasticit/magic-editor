@@ -3,32 +3,31 @@ import ReactDOM from "react-dom";
 import { Editor } from "@tiptap/core";
 import { ThemeProvider } from "styled-components";
 
-import { Excalidraw as ExcalidrawExtension } from "../excalidraw";
+import {
+  DEFAULT_EXCALIDRAW_DATA,
+  Excalidraw as ExcalidrawExtension
+} from "../excalidraw";
 import { isNodeActive } from "../../../utilities";
 
 import { ExcalidrawSettingModal } from "./modal";
 import { getEditorTheme } from "../../../editor/theme";
 
-export const showExcalidrawEditor = (editor: Editor, dom?: HTMLElement) => {
-  const { view, state } = editor;
+export const showExcalidrawEditor = (editor: Editor) => {
   // @ts-ignore
   const isInExcalidraw = isNodeActive(editor, ExcalidrawExtension.name);
 
-  let start: number;
-  let end: number;
-  let data = null;
-
   if (!isInExcalidraw) {
-    const { from, to } = state.selection;
-    start = from;
-    end = to;
-  } else {
-    const attrs = editor.getAttributes(ExcalidrawExtension.name);
-    data = JSON.parse(attrs.data);
+    editor
+      .chain()
+      .insertExcalidraw({ data: DEFAULT_EXCALIDRAW_DATA })
+      .run();
   }
 
-  const div = document.createElement("div");
+  const attrs = editor.getAttributes(ExcalidrawExtension.name);
+  const data = JSON.parse(attrs.data);
+  const blockId = attrs.blockId;
 
+  const div = document.createElement("div");
   editor.options.element.appendChild(div);
 
   ReactDOM.render(
@@ -36,6 +35,7 @@ export const showExcalidrawEditor = (editor: Editor, dom?: HTMLElement) => {
       <ExcalidrawSettingModal
         editor={editor}
         data={data}
+        blockId={blockId}
         onClose={() => {
           ReactDOM.unmountComponentAtNode(div);
           div.remove();
