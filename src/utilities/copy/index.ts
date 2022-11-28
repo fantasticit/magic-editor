@@ -52,6 +52,7 @@ export const copyNode = (editor: Editor, extensionName: string) => {
 export const deleteNode = (editor: Editor, extensionName: string) => {
   const { state } = editor;
   const $pos = state.selection.$anchor;
+  let done = false;
 
   if ($pos.depth) {
     for (let d = $pos.depth; d > 0; d--) {
@@ -63,7 +64,7 @@ export const deleteNode = (editor: Editor, extensionName: string) => {
           editor.dispatchTransaction(
             state.tr.delete($pos.before(d), $pos.after(d)).scrollIntoView()
           );
-        return true;
+        done = true;
       }
     }
   } else {
@@ -74,8 +75,25 @@ export const deleteNode = (editor: Editor, extensionName: string) => {
         .chain()
         .deleteSelection()
         .run();
+      done = true;
     }
   }
 
-  return false;
+  if (!done) {
+    const pos = $pos.pos;
+
+    if (pos) {
+      const node = state.tr.doc.nodeAt(pos);
+
+      if (node && node.type.name === extensionName) {
+        // @ts-ignore
+        if (editor.dispatchTransaction)
+          // @ts-ignore
+          editor.dispatchTransaction(state.tr.delete(pos, pos + node.nodeSize));
+        done = true;
+      }
+    }
+  }
+
+  return done;
 };
