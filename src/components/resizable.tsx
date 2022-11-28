@@ -42,7 +42,7 @@ export const Resizable: React.FC<React.PropsWithChildren<Props>> = ({
   );
 
   const resizeStop = useCallback<ResizeCallback>(
-    (event, direction, element) => {
+    (_, __, element) => {
       const width = parseInt(element.style.width);
       const height = parseInt(element.style.height);
       onResizeStop({ width, height });
@@ -59,7 +59,14 @@ export const Resizable: React.FC<React.PropsWithChildren<Props>> = ({
       }}
       onResize={onResize as ResizeCallback}
       onResizeStop={resizeStop}
-      {...(aspectRatio ? { lockAspectRatio: aspectRatio } : {})}
+      {...(aspectRatio
+        ? {
+            lockAspectRatio:
+              typeof aspectRatio === "number"
+                ? Number(aspectRatio.toFixed(1))
+                : aspectRatio
+          }
+        : {})}
       {...(minWidth ? { minWidth } : {})}>
       {children}
     </ReactResizable>
