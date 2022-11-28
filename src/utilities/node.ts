@@ -1,6 +1,7 @@
 import { Editor } from "@tiptap/core";
 import { EditorState, NodeSelection } from "prosemirror-state";
 import { Node } from "prosemirror-model";
+import { PMNode } from "../prosemirror";
 
 export function getCurrentNode(state: EditorState): Node | null {
   const $head = state.selection.$head;
@@ -81,3 +82,34 @@ export function isListNode(node: Node): boolean {
     isBulletListNode(node) || isOrderedListNode(node) || isTodoListNode(node)
   );
 }
+
+export const findNodeByBlockId = (
+  state: EditorState,
+  nodeType: string,
+  blockId: string
+): { node: PMNode; pos: number } | null => {
+  let target: PMNode | null = null;
+  let pos = -1;
+
+  state.doc.nodesBetween(0, state.doc.content.size, (node, p) => {
+    if (node.type.name === nodeType) {
+      if (node.attrs.blockId === blockId) {
+        target = node;
+        pos = p;
+        return true;
+      }
+
+      return false;
+    } else {
+      return false;
+    }
+  });
+
+  return target ? { node: target, pos } : null;
+};
+
+export const isNodeEmpty = (node: PMNode) => {
+  if (node.isAtom && !node.isTextblock) return false;
+
+  return node.type.name === "paragraph" && node.nodeSize === 2;
+};
