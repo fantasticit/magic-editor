@@ -61,8 +61,20 @@ const _MindView: React.FC<NodeViewProps> = ({
   const { width, height, svg } = node.attrs;
   const [visible, toggleVisible] = useState(false);
   const [zoom, setZoom] = useState(1);
+  const [svgBgColor, svgToImgSrc] = useMemo(() => {
+    if (!svg) return ["transparent", null];
 
-  const svgToImgSrc = useMemo(() => svgToDataURI(svg), [svg]);
+    try {
+      const matches = svg.match(/(?:background:\s)(.)+(?=;\s)/);
+
+      return [
+        matches && matches[0] ? matches[0].split(":")[1].trim() : "transparent",
+        svgToDataURI(svg)
+      ];
+    } catch (e) {
+      return "transparent";
+    }
+  }, [svg]);
 
   const changeZoom = useCallback((type: "in" | "out") => {
     return () => {
@@ -94,7 +106,7 @@ const _MindView: React.FC<NodeViewProps> = ({
   );
 
   return (
-    <NodeViewWrapper>
+    <NodeViewWrapper style={{ background: svgBgColor }}>
       <VisibilitySensor onChange={onViewportChange}>
         <Resizable
           editor={editor}
