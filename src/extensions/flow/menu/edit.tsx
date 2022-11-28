@@ -11,35 +11,31 @@ import { getEditorTheme } from "../../../editor/theme";
 import { DEFAULT_FLOW_DATA } from "./constants";
 
 export const showFlowEditor = (editor: Editor) => {
-  const { state } = editor;
-  // @ts-ignore
   const isInFlow = isNodeActive(editor, FlowExtension.name);
 
-  let start: number;
-  let end: number;
-  let data;
-
   if (!isInFlow) {
-    const { from, to } = state.selection;
-    start = from;
-    end = to;
-    data = DEFAULT_FLOW_DATA;
-  } else {
-    const attrs = editor.getAttributes(FlowExtension.name);
-    data = attrs.xml;
+    editor
+      .chain()
+      .insertFlow({
+        svg: DEFAULT_FLOW_DATA,
+        xml: ""
+      })
+      .run();
   }
 
+  const attrs = editor.getAttributes(FlowExtension.name);
+  const data = attrs.xml;
+  const blockId = attrs.blockId;
+
   const div = document.createElement("div");
-
   editor.options.element.appendChild(div);
-
-  console.log(data);
 
   ReactDOM.render(
     <ThemeProvider theme={getEditorTheme(editor)}>
       <FlowSettingModal
         editor={editor}
         data={data}
+        blockId={blockId}
         onClose={() => {
           ReactDOM.unmountComponentAtNode(div);
           div.remove();

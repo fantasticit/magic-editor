@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import { Modal, Space, Button } from "../../../components";
 import { IconMind } from "../../../icons";
+import { findNodeByBlockId } from "../../../utilities";
+import { Flow } from "../flow";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -38,12 +40,14 @@ const StyledRenderContainer = styled.div`
 type IProps = {
   editor: Editor;
   data: string;
+  blockId: string;
   onClose: () => void;
 };
 
 export const FlowSettingModal: React.FC<IProps> = ({
   editor,
   data: outInXml,
+  blockId,
   onClose
 }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -94,11 +98,31 @@ export const FlowSettingModal: React.FC<IProps> = ({
       } else if (data.event == "autosave") {
         xmlRef.current = data.xml;
       } else if (data.event == "export") {
-        editor
-          .chain()
-          .focus()
-          .setFlow({ svg: data.data, xml: xmlRef.current })
-          .run();
+        let done = false;
+
+        if (blockId) {
+          const maybeNode = findNodeByBlockId(editor.state, Flow.name, blockId);
+
+          if (maybeNode) {
+            editor.commands.command(({ tr }) => {
+              tr.setNodeMarkup(maybeNode.pos, undefined, {
+                ...maybeNode.node.attrs,
+                svg: data.data,
+                xml: xmlRef.current
+              });
+              return true;
+            });
+            done = true;
+          }
+        }
+
+        if (!done) {
+          editor
+            .chain()
+            .focus()
+            .insertFlow({ svg: data.data, xml: xmlRef.current })
+            .run();
+        }
 
         if (exitRef.current) {
           toggleVisible(false);
@@ -112,7 +136,7 @@ export const FlowSettingModal: React.FC<IProps> = ({
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [outInXml]);
+  }, [outInXml, blockId]);
 
   return (
     <Modal
