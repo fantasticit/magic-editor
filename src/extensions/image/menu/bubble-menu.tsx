@@ -16,7 +16,7 @@ import {
   IconDelete
 } from "../../../icons";
 import { useAttributes } from "../../../hooks/use-attributes";
-import { isNodeActive } from "../../../utilities";
+import { deleteNode, isNodeActive } from "../../../utilities";
 import { Image as ImageExtension } from "../image";
 
 const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
@@ -72,6 +72,10 @@ const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const setAlignCenter = useMemo(() => setAlign("center"), [setAlign]);
   const setAlignRight = useMemo(() => setAlign("right"), [setAlign]);
 
+  const deleteMe = useCallback(() => deleteNode(editor, ImageExtension.name), [
+    editor
+  ]);
+
   return (
     <BubbleMenu
       key={"image-bubble-menu"}
@@ -110,7 +114,7 @@ const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
         <Divider />
 
         <Tooltip editor={editor} title="删除">
-          <Button icon={<IconDelete />} onClick={setAlignRight} />
+          <Button icon={<IconDelete />} onClick={deleteMe} />
         </Tooltip>
       </Space>
     </BubbleMenu>

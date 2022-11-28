@@ -1,6 +1,9 @@
 import { mergeAttributes, Node, nodeInputRule } from "@tiptap/core";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 
+import { NodeSelection } from "../../prosemirror";
+import { isNodeEmpty } from "../../utilities";
+
 import { MindView } from "./mind-view";
 
 export const DEFAULT_MIND_DATA = JSON.stringify({
@@ -27,7 +30,7 @@ interface IMindOptions {
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     mind: {
-      setMind: (attrs?: IMindAttrs) => ReturnType;
+      insertMind: (attrs?: IMindAttrs) => ReturnType;
     };
   }
 }
@@ -89,7 +92,7 @@ export const Mind = Node.create<IMindOptions>({
 
   addCommands() {
     return {
-      setMind: attrs => ({ tr, commands, chain, state }) => {
+      insertMind: attrs => ({ tr, commands, chain, state }) => {
         attrs = attrs || {};
         attrs.data = attrs.data || DEFAULT_MIND_DATA;
 
@@ -99,42 +102,26 @@ export const Mind = Node.create<IMindOptions>({
         }
 
         const { selection } = state;
-        const { empty } = selection;
-        const head = selection.$head;
+        const currentNode = selection.$head.node(selection.$head.depth);
+        const isEmpty = currentNode ? isNodeEmpty(currentNode) : true;
+        const insertPos = !isEmpty
+          ? state.tr.selection.from + 1
+          : state.tr.selection.from - 1;
 
-        if (empty) {
-          return chain()
-            .insertContent({
-              type: this.name,
-              attrs
-            })
-            .run();
-        } else {
-          const node = head.node(head.depth);
+        return chain()
+          .command(({ tr, dispatch, state }) => {
+            if (dispatch) {
+              tr.insert(
+                insertPos,
+                state.schema.nodes[this.name].create(attrs)
+              ).setSelection(NodeSelection.create(tr.doc, insertPos));
 
-          if (node.type.name === state.schema.topNodeType.name) {
-            return chain()
-              .command(({ tr, dispatch, state }) => {
-                if (dispatch) {
-                  tr.replaceSelectionWith(
-                    state.schema.nodes[this.name].create(attrs)
-                  ).scrollIntoView();
-                }
+              dispatch(tr);
+            }
 
-                return true;
-              })
-              .run();
-          }
-
-          return chain()
-            .insertContentAt(head.after(), [
-              {
-                type: this.name,
-                attrs
-              }
-            ])
-            .run();
-        }
+            return true;
+          })
+          .run();
       }
     };
   },

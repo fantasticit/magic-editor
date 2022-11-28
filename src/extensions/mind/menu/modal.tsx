@@ -8,6 +8,8 @@ import { IconMind } from "../../../icons";
 import { StyledMindEditorContainer } from "./style";
 import { load, renderMind } from "./kityminder";
 import { Toolbar } from "./toolbar";
+import { findNodeByBlockId } from "../../../utilities";
+import { Mind } from "../mind";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -44,12 +46,14 @@ const StyledToolbarContainer = styled.div`
 type IProps = {
   editor: Editor;
   data: string;
+  blockId: string;
   onClose: () => void;
 };
 
 export const MindSettingModal: React.FC<IProps> = ({
   editor,
   data: outInData,
+  blockId,
   onClose
 }) => {
   const [mind, setMind] = useState(null);
@@ -90,13 +94,34 @@ export const MindSettingModal: React.FC<IProps> = ({
     return mind.exportData("svg").then(svg => {
       // @ts-ignore
       const data = mind.exportJson();
-      editor
-        .chain()
-        .focus()
-        .setMind({ data: JSON.stringify(data), svg })
-        .run();
+
+      let done = false;
+
+      if (blockId) {
+        const maybeNode = findNodeByBlockId(editor.state, Mind.name, blockId);
+
+        if (maybeNode) {
+          editor.commands.command(({ tr }) => {
+            tr.setNodeMarkup(maybeNode.pos, undefined, {
+              ...maybeNode.node.attrs,
+              data: JSON.stringify(data),
+              svg
+            });
+            return true;
+          });
+          done = true;
+        }
+      }
+
+      if (!done) {
+        editor
+          .chain()
+          .focus()
+          .insertMind({ data: JSON.stringify(data), svg })
+          .run();
+      }
     });
-  }, [editor, toggleVisible, mind]);
+  }, [editor, toggleVisible, mind, blockId]);
 
   const saveAndExit = useCallback(() => {
     save().then(() => {

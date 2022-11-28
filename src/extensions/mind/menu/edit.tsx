@@ -10,23 +10,21 @@ import { MindSettingModal } from "./modal";
 import { getEditorTheme } from "../../../editor/theme";
 
 export const showMindEditor = (editor: Editor) => {
-  const { state } = editor;
   // @ts-ignore
   const isInMind = isNodeActive(editor, MindExtension.name);
 
-  let start: number;
-  let end: number;
-  let data;
-
   if (!isInMind) {
-    const { from, to } = state.selection;
-    start = from;
-    end = to;
-    data = JSON.parse(DEFAULT_MIND_DATA);
-  } else {
-    const attrs = editor.getAttributes(MindExtension.name);
-    data = JSON.parse(attrs.data);
+    editor
+      .chain()
+      .insertMind({
+        data: DEFAULT_MIND_DATA
+      })
+      .run();
   }
+
+  const attrs = editor.getAttributes(MindExtension.name);
+  const data = JSON.parse(attrs.data);
+  const blockId = attrs.blockId;
 
   const div = document.createElement("div");
   editor.options.element.appendChild(div);
@@ -36,6 +34,7 @@ export const showMindEditor = (editor: Editor) => {
       <MindSettingModal
         editor={editor}
         data={data}
+        blockId={blockId}
         onClose={() => {
           ReactDOM.unmountComponentAtNode(div);
           div.remove();
