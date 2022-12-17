@@ -31,9 +31,10 @@ export { HardBreak } from "./hard-break";
 export { UniqueID } from "./unique-id";
 export { Dragable } from "./dragable";
 export { Mention } from "./mention";
-export { Slash } from "./slash";
+export { createSlash } from "./slash";
 export {
   ColumnsExtensions,
   ColumnsStaticMenu,
   ColumnsBubbleMenu
 } from "./columns";
+export { Perf, addAnalytics } from "./perf";

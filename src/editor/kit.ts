@@ -6,6 +6,7 @@ import { Paragraph } from "../extensions/paragraph";
 import { Text } from "../extensions/text";
 import { HardBreak } from "../extensions/hard-break";
 import { TrailingNode } from "../extensions/trailing-node";
+import { Perf } from "../extensions/perf";
 
 export interface EditorKit {
   schema: string;
@@ -29,6 +30,7 @@ export const resolveEditorKit = (props: EditorKit) => {
     Focus,
     Loading,
     TrailingNode,
+    Perf,
     ...extensions.flat()
   ];
 

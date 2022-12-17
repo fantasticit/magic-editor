@@ -6,6 +6,8 @@ import {
   findParentNode
 } from "../../prosemirror";
 
+import { addAnalytics } from "../perf";
+
 import { Column } from "./column";
 import { Columns } from "./columns";
 
@@ -112,7 +114,12 @@ export function addOrDeleteCol({
       nextCols
     ).setSelection(TextSelection.near(tr.doc.resolve(nextSelectPos)));
 
-    dispatch(tr);
+    dispatch(
+      addAnalytics(tr, {
+        subject: "columns",
+        action: ` ${type} column`
+      })
+    );
   }
 
   return true;
