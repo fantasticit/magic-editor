@@ -43,7 +43,7 @@ export const Columns = Node.create({
   parseHTML() {
     return [
       {
-        tag: "div[class=grid]"
+        tag: "div[class=columns]"
       }
     ];
   },
