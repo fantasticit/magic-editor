@@ -2,6 +2,7 @@ import React from "react";
 
 import { ColorPicker, Button, Tooltip } from "../../../../components";
 import { IconBackgroundColor } from "../../../../icons";
+import i18n from "../../../../i18n";
 
 export const BgColor = ({
   editor,
@@ -14,7 +15,7 @@ export const BgColor = ({
       onSetColor={color => {
         setBackgroundColor(color);
       }}>
-      <Tooltip editor={editor} title="背景色" zLevel="highest">
+      <Tooltip editor={editor} title={i18n('style', 'background')} zLevel="highest">
         <Button
           disabled={!selectedNode}
           icon={

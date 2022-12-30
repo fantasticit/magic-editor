@@ -5,37 +5,38 @@ import { Editor } from '@tiptap/core';
 import { Select } from '../../components';
 import { useActive } from '../../hooks/use-active';
 import { Heading as HeadingExtension } from './heading';
+import i18n from "../../i18n";
 
 type HeadingOrParagraph = Level | 'paragraph';
 
 const options: Array<{ label: React.ReactNode; value: HeadingOrParagraph }> = [
   {
-    label: '正文',
+    label: i18n('style', 'body'),
     value: 'paragraph',
   },
   {
-    label: <h1 style={{ margin: 0, fontSize: '1.3em' }}>标题1</h1>,
+    label: <h1 style={{ margin: 0, fontSize: '1.3em' }}>{i18n('style', 'title')}1</h1>,
     value: 1,
   },
   {
-    label: <h2 style={{ margin: 0, fontSize: '1.1em' }}>标题2</h2>,
+    label: <h2 style={{ margin: 0, fontSize: '1.1em' }}>{i18n('style', 'title')}2</h2>,
     value: 2,
   },
   {
-    label: <h3 style={{ margin: 0, fontSize: '1.0em' }}>标题3</h3>,
+    label: <h3 style={{ margin: 0, fontSize: '1.0em' }}>{i18n('style', 'title')}3</h3>,
     value: 3,
   },
   {
-    label: <h4 style={{ margin: 0, fontSize: '0.9em' }}>标题4</h4>,
+    label: <h4 style={{ margin: 0, fontSize: '0.9em' }}>{i18n('style', 'title')}4</h4>,
     value: 4,
   },
   {
-    label: <h5 style={{ margin: 0, fontSize: '0.8em' }}>标题5</h5>,
+    label: <h5 style={{ margin: 0, fontSize: '0.8em' }}>{i18n('style', 'title')}5</h5>,
     value: 5,
   },
 
   {
-    label: <h6 style={{ margin: 0, fontSize: '0.8em' }}>标题6</h6>,
+    label: <h6 style={{ margin: 0, fontSize: '0.8em' }}>{i18n('style', 'title')}6</h6>,
     value: 6,
   },
 ];

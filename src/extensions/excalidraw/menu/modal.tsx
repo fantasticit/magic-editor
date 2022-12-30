@@ -7,6 +7,7 @@ import { IconExcalidraw } from "../../../icons";
 import { findNodeByBlockId } from "../../../utilities";
 
 import { Excalidraw as ExcalidrawExtension } from "../excalidraw";
+import i18n from "../../../i18n";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -142,11 +143,11 @@ export const ExcalidrawSettingModal: React.FC<IProps> = ({
   return (
     <Modal
       centered
-      title="绘图"
+      title={i18n('draw', 'title')}
       fullScreen
       visible={visible}
-      okText="保存"
-      cancelText="退出"
+      okText={i18n('save')}
+      cancelText={i18n('cancel')}
       motion={false}
       header={
         <StyledHeader>
@@ -154,27 +155,27 @@ export const ExcalidrawSettingModal: React.FC<IProps> = ({
             <StyledIconContainer>
               <IconExcalidraw />
             </StyledIconContainer>
-            <strong>绘图</strong>
+            <strong>{i18n('draw', 'title')}</strong>
           </Space>
           <Space>
             <Button type="primary" onClick={save}>
-              保存
+              {i18n('save')}
             </Button>
-            <Button onClick={saveAndExit}>保存并退出</Button>
+            <Button onClick={saveAndExit}>{i18n('saveAndExit')}</Button>
           </Space>
         </StyledHeader>
       }
       footer={null}>
       <StyledRenderContainer>
         {loading && <Loading></Loading>}
-        {error && <span>{(error && error.message) || "未知错误"}</span>}
+        {error && <span>{(error && error.message) || i18n('error')}</span>}
         <div style={{ width: "100%", height: "100%" }} ref={renderEditor}>
           {!loading && !error && Excalidraw ? (
             // @ts-ignore
             <Excalidraw
               ref={renderExcalidraw}
               onChange={onChange}
-              langCode="zh-CN"
+              langCode={i18n.localeLangCountry}
               initialData={initialData}
             />
           ) : null}

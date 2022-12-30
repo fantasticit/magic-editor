@@ -15,6 +15,7 @@ import {
   selectRow,
   selectTable
 } from "../utilities";
+import i18n from "../../../i18n";
 
 export interface TableCellOptions {
   HTMLAttributes: Record<string, any>;
@@ -149,7 +150,7 @@ export const TableCell = Node.create<
 
                     ReactDOM.render(
                       // @ts-ignore
-                      <Tooltip editor={this.editor} title="向后增加一行">
+                      <Tooltip editor={this.editor} title={i18n('table', 'insertBetween')}>
                         <IconPlus />
                       </Tooltip>,
                       grip

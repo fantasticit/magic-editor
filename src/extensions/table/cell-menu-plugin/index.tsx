@@ -2,19 +2,20 @@ import {
   BubbleMenuPlugin,
   BubbleMenuPluginProps
 } from "@tiptap/extension-bubble-menu";
-import { Editor, posToDOMRect } from "@tiptap/core";
-import tippy, { Instance } from "tippy.js";
+import {Editor, posToDOMRect} from "@tiptap/core";
+import tippy, {Instance} from "tippy.js";
 import ReactDOM from "react-dom";
-import React, { useCallback, useEffect, useRef } from "react";
-import { Node as PMNode } from "prosemirror-model";
+import React, {useCallback, useEffect, useRef} from "react";
+import {Node as PMNode} from "prosemirror-model";
 
-import { findParentNode } from "../../../prosemirror";
-import { ZINDEX_DEFAULT } from "../../../constants";
-import { Dropdown } from "../../../components";
+import {findParentNode} from "../../../prosemirror";
+import {ZINDEX_DEFAULT} from "../../../constants";
+import {Dropdown} from "../../../components";
+import i18n from "../../../i18n";
 
 const cellButtonsConfig = [
   {
-    name: "向上增加一行",
+    name: i18n('table', 'insertRowUp'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -24,7 +25,7 @@ const cellButtonsConfig = [
         .run()
   },
   {
-    name: "向下增加一行",
+    name: i18n('table', 'insertRowDown'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -34,7 +35,7 @@ const cellButtonsConfig = [
         .run()
   },
   {
-    name: "删除当前行",
+    name: i18n('table', 'removeRows'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -47,7 +48,7 @@ const cellButtonsConfig = [
     divider: true
   },
   {
-    name: "向前增加一列",
+    name: i18n('table', 'insertColumnLeft'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -57,7 +58,7 @@ const cellButtonsConfig = [
         .run()
   },
   {
-    name: "向后增加一列",
+    name: i18n('table', 'insertColumnRight'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -67,7 +68,7 @@ const cellButtonsConfig = [
         .run()
   },
   {
-    name: "删除当前列",
+    name: i18n('table', 'removeColumns'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -80,7 +81,7 @@ const cellButtonsConfig = [
     divider: true
   },
   {
-    name: "将首行设为(或取消)表头",
+    name: i18n('table', 'toggleHeaderRow'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -90,7 +91,7 @@ const cellButtonsConfig = [
         .run()
   },
   {
-    name: "将首列设为(或取消)表头",
+    name: i18n('table', 'toggleHeaderColumn'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -100,7 +101,7 @@ const cellButtonsConfig = [
         .run()
   },
   {
-    name: "将当前单元格设为(或取消)表头",
+    name: i18n('table', 'toggleHeaderCell'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -113,7 +114,7 @@ const cellButtonsConfig = [
     divider: true
   },
   {
-    name: "删除表格",
+    name: i18n('table', 'remove'),
     action: (editor: Editor) =>
       editor
         .chain()
@@ -129,7 +130,7 @@ const predicateIsTableCell = (node: PMNode) =>
 
 const TableCellMenu: React.FC<React.PropsWithChildren<{
   editor: Editor;
-}>> = ({ editor }) => {
+}>> = ({editor}) => {
   const popupRef = useRef<Instance | null>(null);
 
   const toggleVisible = useCallback(() => {
@@ -149,7 +150,7 @@ const TableCellMenu: React.FC<React.PropsWithChildren<{
         }}>
         {cellButtonsConfig.map((btn, index) => {
           return btn.divider ? (
-            <Dropdown.Divider key={index} />
+            <Dropdown.Divider key={index}/>
           ) : (
             <Dropdown.Item key={btn.name} onClick={() => btn?.action?.(editor)}>
               {btn.name}
@@ -163,7 +164,7 @@ const TableCellMenu: React.FC<React.PropsWithChildren<{
 
     const popup: Instance[] = tippy("body", {
       getReferenceClientRect: () => {
-        const { selection } = editor.state;
+        const {selection} = editor.state;
         const parent = findParentNode(predicateIsTableCell)(selection);
 
         // @ts-ignore
@@ -202,7 +203,7 @@ const TableCellMenu: React.FC<React.PropsWithChildren<{
 
   useEffect(() => {
     const handler = (event: MouseEvent) => {
-      const { selection } = editor.state;
+      const {selection} = editor.state;
       const parent = findParentNode(predicateIsTableCell)(selection);
 
       if (parent) {
@@ -224,7 +225,7 @@ const TableCellMenu: React.FC<React.PropsWithChildren<{
 export const TableCellMenuPlugin = (editor: Editor) => {
   const div = document.createElement("div");
 
-  ReactDOM.render(<TableCellMenu editor={editor} />, div);
+  ReactDOM.render(<TableCellMenu editor={editor}/>, div);
 
   return BubbleMenuPlugin({
     pluginKey: "TableCellMenuPlugin",
@@ -239,7 +240,7 @@ export const TableCellMenuPlugin = (editor: Editor) => {
       arrow: false,
       theme: "bubble-menu padding-0 hidden",
       getReferenceClientRect: () => {
-        const { selection } = editor.state;
+        const {selection} = editor.state;
 
         const predicate = (node: PMNode) =>
           ["tableHeader", "tableCell"].includes(node.type.name);
@@ -256,8 +257,8 @@ export const TableCellMenuPlugin = (editor: Editor) => {
       },
       position: "bottom"
     },
-    shouldShow: (({ state }) => {
-      const { selection } = state;
+    shouldShow: (({state}) => {
+      const {selection} = state;
       const predicate = (node: PMNode) =>
         ["tableHeader", "tableCell"].includes(node.type.name);
       const parent = findParentNode(predicate)(selection);

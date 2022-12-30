@@ -7,6 +7,7 @@ import { useActive } from "../../../hooks/use-active";
 import { Iframe as IframeExtension } from "../iframe";
 
 import { showURLEditor } from "./edit";
+import i18n from "../../../i18n";
 
 export const IframeStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isActive = useActive(editor, IframeExtension.name);
@@ -16,7 +17,7 @@ export const IframeStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   }, [editor]);
 
   return (
-    <Tooltip title="外链" editor={editor}>
+    <Tooltip title={i18n('iframe', 'display')} editor={editor}>
       <Button icon={<IconVisitlink />} onClick={toggleLink} active={isActive} />
     </Tooltip>
   );

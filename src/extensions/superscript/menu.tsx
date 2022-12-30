@@ -5,6 +5,7 @@ import { Button, Tooltip } from "../../components";
 import { IconSuperscript } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 import { Superscript as SuperscriptExtension } from "./index";
+import i18n from "../../i18n";
 
 export const SuperscriptStaticMenu: React.FC<{ editor: Editor }> = ({
   editor
@@ -22,7 +23,7 @@ export const SuperscriptStaticMenu: React.FC<{ editor: Editor }> = ({
   );
 
   return (
-    <Tooltip title="上标" editor={editor}>
+    <Tooltip title={i18n('style', 'superscript')} editor={editor}>
       <Button
         active={isSuperscriptActive}
         icon={<IconSuperscript />}

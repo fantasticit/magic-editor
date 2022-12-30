@@ -9,6 +9,7 @@ import { Tooltip } from "../../../components";
 import { IconPlus } from "../../../icons";
 
 import { getCellsInRow, isColumnSelected, selectColumn } from "../utilities";
+import i18n from "../../../i18n";
 
 export interface TableHeaderOptions {
   HTMLAttributes: Record<string, any>;
@@ -111,7 +112,7 @@ export const TableHeader = Node.create<
                     grip.className = className;
 
                     ReactDOM.render(
-                      <Tooltip editor={this.editor} title="向后增加一列">
+                      <Tooltip editor={this.editor} title={i18n('table', 'insertColumnRight')}>
                         <IconPlus></IconPlus>
                       </Tooltip>,
                       grip

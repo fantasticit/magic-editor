@@ -7,6 +7,7 @@ import { useActive } from "../../hooks/use-active";
 import { getEditorProvider } from "../../editor/provider";
 
 import { Status as StatusExtension } from "./status";
+import i18n from "../../i18n";
 
 export const StatusStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isStatusActive = useActive(editor, StatusExtension.name);
@@ -25,7 +26,7 @@ export const StatusStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   }, [editor]);
 
   return (
-    <Tooltip title="状态" editor={editor}>
+    <Tooltip title={i18n('status', 'title')} editor={editor}>
       <Button
         icon={<IconStatus />}
         onClick={setStatus}

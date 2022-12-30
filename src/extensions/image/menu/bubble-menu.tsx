@@ -18,6 +18,7 @@ import {
 import { useAttributes } from "../../../hooks/use-attributes";
 import { deleteNode, isNodeActive } from "../../../utilities";
 import { Image as ImageExtension } from "../image";
+import i18n from "../../../i18n";
 
 const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const { width: currentWidth, height: currentHeight, align } = useAttributes(
@@ -87,7 +88,7 @@ const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
       }}
       forNode>
       <Space>
-        <Tooltip editor={editor} title="靠左">
+        <Tooltip editor={editor} title={i18n('align', 'left')}>
           <Button
             active={align === "left"}
             icon={<IconImageAlignLeft />}
@@ -95,7 +96,7 @@ const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="居中">
+        <Tooltip editor={editor} title={i18n('align', 'center')}>
           <Button
             active={align === "center"}
             icon={<IconImageAlignCenter />}
@@ -103,7 +104,7 @@ const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="靠右">
+        <Tooltip editor={editor} title={i18n('align', 'right')}>
           <Button
             active={align === "right"}
             icon={<IconImageAlignRight />}
@@ -113,7 +114,7 @@ const _ImageBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
 
         <Divider />
 
-        <Tooltip editor={editor} title="删除">
+        <Tooltip editor={editor} title={i18n('delete')}>
           <Button icon={<IconDelete />} onClick={deleteMe} />
         </Tooltip>
       </Space>

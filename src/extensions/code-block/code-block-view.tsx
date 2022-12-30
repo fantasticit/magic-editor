@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { IconCopy } from "../../icons";
 import { Tooltip, Button, Select } from "../../components";
 import { copy } from "../../utilities";
+import i18n from "../../i18n";
 
 const StyledToolbar = styled.div`
   display: flex;
@@ -59,7 +60,7 @@ export const CodeBlockView: React.FC<NodeViewProps> = ({
           onChange={value => updateAttributes({ language: value })}
           disabled={!isEditable}
           getPopupContainer={getPopupContainer}></Select>
-        <Tooltip title="复制" editor={editor}>
+        <Tooltip title={i18n('copy')} editor={editor}>
           <Button
             size="small"
             icon={<IconCopy />}

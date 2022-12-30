@@ -6,6 +6,7 @@ import { IconUnderline } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { Underline as UnderlineExtension } from "./underline";
+import i18n from "../../i18n";
 
 export const UnderlineStaticMenu: React.FC<{ editor: Editor }> = ({
   editor
@@ -23,7 +24,7 @@ export const UnderlineStaticMenu: React.FC<{ editor: Editor }> = ({
   );
 
   return (
-    <Tooltip title="下划线" editor={editor}>
+    <Tooltip title={i18n('style', 'underline')} editor={editor}>
       <Button
         icon={<IconUnderline />}
         onClick={toggleUnderline}

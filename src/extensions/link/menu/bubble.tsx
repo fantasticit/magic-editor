@@ -13,6 +13,7 @@ import { useAttributes } from "../../../hooks/use-attributes";
 import { IconEdit, IconUnlink, IconVisitlink } from "../../../icons";
 import { Link as LinkExtension } from "../link";
 import { showLinkEditor } from "./edit";
+import i18n from "../../../i18n";
 
 interface IProps {
   editor: Editor;
@@ -55,11 +56,11 @@ export const LinkBubbleMenu: React.FC<IProps> = ({ editor }) => {
     <BubbleMenu editor={editor} shouldShow={shouldShow}>
       <div ref={containerRef}>
         <Space spacing={4}>
-          <Tooltip editor={editor} title="访问链接">
+          <Tooltip editor={editor} title={i18n('link', 'visit')}>
             <Button size="small" icon={<IconVisitlink />} onClick={visitLink} />
           </Tooltip>
 
-          <Tooltip editor={editor} title="编辑链接">
+          <Tooltip editor={editor} title={i18n('link', 'edit')}>
             <Button
               size="small"
               icon={<IconEdit />}
@@ -69,7 +70,7 @@ export const LinkBubbleMenu: React.FC<IProps> = ({ editor }) => {
 
           <Divider />
 
-          <Tooltip editor={editor} title="去除链接">
+          <Tooltip editor={editor} title={i18n('link', 'remove')}>
             <Button onClick={unsetLink} icon={<IconUnlink />} size="small" />
           </Tooltip>
         </Space>

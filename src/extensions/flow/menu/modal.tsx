@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Editor } from "@tiptap/core";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {Editor} from "@tiptap/core";
 import styled from "styled-components";
 
-import { Modal, Space, Button } from "../../../components";
-import { IconMind } from "../../../icons";
-import { findNodeByBlockId } from "../../../utilities";
-import { Flow } from "../flow";
+import {Modal, Space, Button} from "../../../components";
+import {IconMind} from "../../../icons";
+import {findNodeByBlockId} from "../../../utilities";
+import {Flow} from "../flow";
+import i18n from "../../../i18n";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -45,11 +46,11 @@ type IProps = {
 };
 
 export const FlowSettingModal: React.FC<IProps> = ({
-  editor,
-  data: outInXml,
-  blockId,
-  onClose
-}) => {
+                                                     editor,
+                                                     data: outInXml,
+                                                     blockId,
+                                                     onClose
+                                                   }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const exitRef = useRef(false);
   const xmlRef = useRef("");
@@ -104,7 +105,7 @@ export const FlowSettingModal: React.FC<IProps> = ({
           const maybeNode = findNodeByBlockId(editor.state, Flow.name, blockId);
 
           if (maybeNode) {
-            editor.commands.command(({ tr }) => {
+            editor.commands.command(({tr}) => {
               tr.setNodeMarkup(maybeNode.pos, undefined, {
                 ...maybeNode.node.attrs,
                 svg: data.data,
@@ -120,7 +121,7 @@ export const FlowSettingModal: React.FC<IProps> = ({
           editor
             .chain()
             .focus()
-            .insertFlow({ svg: data.data, xml: xmlRef.current })
+            .insertFlow({svg: data.data, xml: xmlRef.current})
             .run();
         }
 
@@ -151,16 +152,16 @@ export const FlowSettingModal: React.FC<IProps> = ({
         <StyledHeader>
           <Space>
             <StyledIconContainer>
-              <IconMind />
+              <IconMind/>
             </StyledIconContainer>
-            <strong>流程图</strong>
+            <strong>{i18n('flow', 'title')}</strong>
           </Space>
 
           <Space>
             <Button type="primary" onClick={save}>
-              保存
+              {i18n('save')}
             </Button>
-            <Button onClick={saveAndExit}>保存并退出</Button>
+            <Button onClick={saveAndExit}>{i18n('saveAndExit')}</Button>
           </Space>
         </StyledHeader>
       }

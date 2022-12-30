@@ -2,6 +2,7 @@ import React from "react";
 
 import { ColorPicker, Button, Tooltip } from "../../../../components";
 import { IconFontColor } from "../../../../icons";
+import i18n from "../../../../i18n";
 
 export const FontColor = ({
   editor,
@@ -14,7 +15,7 @@ export const FontColor = ({
       onSetColor={color => {
         setFontColor(color);
       }}>
-      <Tooltip editor={editor} title="文本色" zLevel="highest">
+      <Tooltip editor={editor} title={i18n('color')} zLevel="highest">
         <Button
           disabled={!selectedNode}
           icon={

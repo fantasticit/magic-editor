@@ -6,6 +6,7 @@ import { IconImage } from "../../../icons";
 import { useActive } from "../../../hooks/use-active";
 import { uploadImage } from "../../../utilities";
 import { Image as ImageExtension } from "../image";
+import i18n from "../../../i18n";
 
 export const ImageStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isCodeActive = useActive(editor, ImageExtension.name);
@@ -24,7 +25,7 @@ export const ImageStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   }, [editor]);
 
   return (
-    <Tooltip title="上传图片" editor={editor}>
+    <Tooltip title={i18n('image', 'uploadShort')} editor={editor}>
       <Button icon={<IconImage />} onClick={setImage} active={isCodeActive} />
     </Tooltip>
   );

@@ -7,6 +7,7 @@ import { IconBlockquote } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { Blockquote as BlockquoteExtension } from "./blockquote";
+import i18n from "../../i18n";
 
 export const BlockquoteStaticMenu: React.FC<{ editor: Editor }> = ({
   editor
@@ -24,7 +25,7 @@ export const BlockquoteStaticMenu: React.FC<{ editor: Editor }> = ({
   );
 
   return (
-    <Tooltip title="引用" editor={editor}>
+    <Tooltip title={i18n('blockquote')} editor={editor}>
       <Button
         active={isBlockquoteActive}
         icon={<IconBlockquote />}

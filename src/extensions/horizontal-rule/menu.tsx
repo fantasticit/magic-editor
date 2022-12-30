@@ -6,6 +6,7 @@ import { IconHorizontalRule } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { HorizontalRule as HorizontalRuleExtension } from "./horizontal-rule";
+import i18n from "../../i18n";
 
 export const HorizontalRuleStaticMenu: React.FC<{ editor: Editor }> = ({
   editor
@@ -26,7 +27,7 @@ export const HorizontalRuleStaticMenu: React.FC<{ editor: Editor }> = ({
   );
 
   return (
-    <Tooltip title="分割线" editor={editor}>
+    <Tooltip title={i18n('horizontalLine')} editor={editor}>
       <Button
         active={isHorizontalRuleActive}
         icon={<IconHorizontalRule />}

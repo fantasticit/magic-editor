@@ -8,6 +8,7 @@ import { IconMind, IconZoomIn, IconZoomOut } from "../../icons";
 import { Resizable, Space, Button, Tooltip } from "../../components";
 import { MAX_ZOOM, MIN_ZOOM, ZOOM_STEP } from "../../constants";
 import { clamp, svgToDataURI } from "../../utilities";
+import i18n from "../../i18n";
 
 const StyledContainer = styled.div`
   position: relative;
@@ -140,13 +141,13 @@ const _MindView: React.FC<NodeViewProps> = ({
                 <StyledIconContainer>
                   <IconMind />
                 </StyledIconContainer>
-                思维导图
+                {i18n('mind', 'title')}
               </Space>
             </StyledTitleContainer>
 
             <StyledToolbarContainer>
               <Space spacing={4}>
-                <Tooltip editor={editor} title="放大">
+                <Tooltip editor={editor} title={i18n('zoomIn')}>
                   <Button
                     size="small"
                     icon={<IconZoomIn />}
@@ -154,7 +155,7 @@ const _MindView: React.FC<NodeViewProps> = ({
                   />
                 </Tooltip>
 
-                <Tooltip editor={editor} title="缩小">
+                <Tooltip editor={editor} title={i18n('zoomOut')}>
                   <Button
                     size="small"
                     icon={<IconZoomOut />}

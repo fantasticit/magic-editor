@@ -6,6 +6,7 @@ import { IconBold } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { Bold as BoldExtension } from "./bold";
+import i18n from "../../i18n";
 
 export const BoldStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isBoldActive = useActive(editor, BoldExtension.name);
@@ -21,7 +22,7 @@ export const BoldStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   );
 
   return (
-    <Tooltip title="粗体" editor={editor}>
+    <Tooltip title={i18n('style', 'bold')} editor={editor}>
       <Button icon={<IconBold />} onClick={toggleBold} active={isBoldActive} />
     </Tooltip>
   );

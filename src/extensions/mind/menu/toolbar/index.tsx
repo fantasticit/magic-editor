@@ -19,6 +19,7 @@ import { Priority } from "./priority";
 import { Progress } from "./progress";
 import { Template } from "./template";
 import { Theme } from "./theme";
+import i18n from "../../../../i18n";
 
 export const Toolbar = ({ editor, mind }) => {
   const [node, setNode] = useState(null); // 当前选择节点
@@ -231,17 +232,17 @@ export const Toolbar = ({ editor, mind }) => {
 
   return (
     <Space>
-      <Tooltip editor={editor} zLevel="highest" title="撤销">
+      <Tooltip editor={editor} zLevel="highest" title={i18n('undo')}>
         <Button onClick={undo} icon={<IconUndo />} disabled={!hasUndo} />
       </Tooltip>
 
-      <Tooltip editor={editor} zLevel="highest" title="重做">
+      <Tooltip editor={editor} zLevel="highest" title={i18n('redo')}>
         <Button onClick={redo} icon={<IconRedo />} disabled={!hasRedo} />
       </Tooltip>
 
       <Divider />
 
-      <Tooltip editor={editor} zLevel="highest" title="加粗">
+      <Tooltip editor={editor} zLevel="highest" title={i18n('style', 'bold')}>
         <Button disabled={!node} onClick={toggleBold} icon={<IconBold />} />
       </Tooltip>
 
@@ -277,7 +278,7 @@ export const Toolbar = ({ editor, mind }) => {
 
       <Divider />
 
-      <Tooltip editor={editor} zLevel="highest" title="居中">
+      <Tooltip editor={editor} zLevel="highest" title={i18n('align', 'center')}>
         <Button
           size="small"
           icon={<IconCenter style={{ fontSize: "0.85em" }} />}
@@ -285,7 +286,7 @@ export const Toolbar = ({ editor, mind }) => {
         />
       </Tooltip>
 
-      <Tooltip editor={editor} zLevel="highest" title="缩小">
+      <Tooltip editor={editor} zLevel="highest" title={i18n('zoomOut')}>
         <Button
           size="small"
           icon={<IconZoomOut style={{ fontSize: "0.85em" }} />}
@@ -293,7 +294,7 @@ export const Toolbar = ({ editor, mind }) => {
         />
       </Tooltip>
 
-      <Tooltip editor={editor} zLevel="highest" title="放大">
+      <Tooltip editor={editor} zLevel="highest" title={i18n('zoomIn')}>
         <Button
           size="small"
           icon={<IconZoomIn style={{ fontSize: "0.85em" }} />}

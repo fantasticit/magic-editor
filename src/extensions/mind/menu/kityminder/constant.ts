@@ -1,13 +1,15 @@
+import i18n from "../../../../i18n";
+
 const getProgressTitle = (index) => {
   switch (index) {
     case 0:
-      return '移除进度';
+      return i18n('mind', 'progressRemove');
     case 1:
-      return '未开始';
+      return i18n('mind', 'progressStart');
     case 9:
-      return '全部完成';
+      return i18n('mind', 'progressDone');
     default:
-      return '完成' + (index - 1) + '/8';
+      return i18n('mind', 'progress') + (index - 1) + '/8';
   }
 };
 
@@ -20,7 +22,7 @@ export const PROGRESSES = Array.from({ length: 10 }, (_, i) => {
 
 export const PRIORITIES = [
   {
-    text: '移除优先级',
+    text: i18n('mind', 'removePriority'),
     value: 0,
   },
   ...Array.from({ length: 9 }, (_, i) => {
@@ -33,112 +35,112 @@ export const PRIORITIES = [
 
 export const TEMPLATES = [
   {
-    label: '经典',
-    value: 'default',
+    label: i18n('mind', 'template', 'default'),
+    value: "default"
   },
   {
-    label: '文件夹',
-    value: 'filetree',
+    label: i18n('mind', 'template', 'fileTree'),
+    value: "filetree"
   },
   {
-    label: '鱼骨图',
-    value: 'fish-bone',
+    label: i18n('mind', 'template', 'fishBone'),
+    value: "fish-bone"
   },
   {
-    label: '靠右',
-    value: 'right',
+    label: i18n('mind', 'template', 'right'),
+    value: "right"
   },
   {
-    label: '组织',
-    value: 'structure',
+    label: i18n('mind', 'template', 'structure'),
+    value: "structure"
   },
   {
-    label: '天盘',
-    value: 'tianpan',
-  },
+    label: i18n('mind', 'template', 'tianpan'),
+    value: "tianpan"
+  }
 ];
 
 export const THEMES = [
   {
-    label: '经典',
-    value: 'classic',
+    label: i18n('mind', 'theme', 'default'),
+    value: "classic",
     style: {
-      color: 'rgb(68, 51, 0)',
-      background: ' rgb(233, 223, 152)',
-    },
+      color: "rgb(68, 51, 0)",
+      background: " rgb(233, 223, 152)"
+    }
   },
   {
-    label: '紧凑',
-    value: 'classic-compact',
+    label: i18n('mind', 'theme', 'classicCompact'),
+    value: "classic-compact",
     style: {
-      color: 'rgb(68, 51, 0)',
-      background: ' rgb(233, 223, 152)',
-    },
+      color: "rgb(68, 51, 0)",
+      background: " rgb(233, 223, 152)"
+    }
   },
   {
-    label: '清新红',
-    value: 'fresh-red',
+    label: i18n('mind', 'theme', 'freshRed'),
+    value: "fresh-red",
     style: {
-      color: 'white',
-      background: ' rgb(191, 115, 115)',
-    },
+      color: "white",
+      background: " rgb(191, 115, 115)"
+    }
   },
   {
-    label: '泥土黄',
-    value: 'fresh-soil',
+    label: i18n('mind', 'theme', 'freshSoil'),
+    value: "fresh-soil",
     style: {
-      color: 'white',
-      background: 'rgb(191, 147, 115)',
-    },
+      color: "white",
+      background: "rgb(191, 147, 115)"
+    }
   },
   {
-    label: '文艺绿',
-    value: 'fresh-green',
+    label: i18n('mind', 'theme', 'freshGreen'),
+    value: "fresh-green",
     style: {
-      color: 'white',
-      background: 'rgb(115, 191, 118)',
-    },
+      color: "white",
+      background: "rgb(115, 191, 118)"
+    }
   },
   {
-    label: '天空蓝',
-    value: 'fresh-blue',
+    label: i18n('mind', 'theme', 'freshBlue'),
+    value: "fresh-blue",
     style: {
-      color: 'white',
-      background: 'rgb(115, 161, 191)',
-    },
+      color: "white",
+      background: "rgb(115, 161, 191)"
+    }
   },
   {
-    label: '浪漫紫',
-    value: 'fresh-purple',
+    label: i18n('mind', 'theme', 'freshPurple'),
+    value: "fresh-purple",
     style: {
-      color: 'white',
-      background: 'rgb(123, 115, 191)',
-    },
+      color: "white",
+      background: "rgb(123, 115, 191)"
+    }
   },
   {
-    label: '胭脂粉',
-    value: 'fresh-pink',
+    label: i18n('mind', 'theme', 'freshPink'),
+    value: "fresh-pink",
     style: {
-      color: 'white',
-      background: 'rgb(191, 115, 148)',
-    },
+      color: "white",
+      background: "rgb(191, 115, 148)"
+    }
   },
   {
-    label: '冷光',
-    value: 'snow',
+    label: i18n('mind', 'theme', 'snow'),
+    value: "snow",
     style: {
-      color: '#fff',
-      background: 'rgb(164, 197, 192)',
-    },
+      color: "#fff",
+      background: "rgb(164, 197, 192)"
+    }
   },
   {
-    label: '鱼骨图',
-    value: 'fish',
+    label: i18n('mind', 'theme', 'fish'),
+    value: "fish",
     style: {
-      color: '#fff',
-      background: 'rgb(58, 65, 68)',
-    },
-  },
+      color: "#fff",
+      background: "rgb(58, 65, 68)"
+    }
+  }
 ];
 
 export const MIN_ZOOM = 10;

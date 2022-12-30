@@ -7,6 +7,7 @@ import { useActive } from "../../../hooks/use-active";
 import { Excalidraw as ExcalidrawExtension } from "../excalidraw";
 
 import { showExcalidrawEditor } from "./edit";
+import i18n from "../../../i18n";
 
 export const ExcalidrawStaticMenu: React.FC<{ editor: Editor }> = ({
   editor
@@ -18,7 +19,7 @@ export const ExcalidrawStaticMenu: React.FC<{ editor: Editor }> = ({
   }, [editor]);
 
   return (
-    <Tooltip title="绘图" editor={editor}>
+    <Tooltip title={i18n('draw', 'title')} editor={editor}>
       <Button
         icon={<IconExcalidraw />}
         onClick={toggleLink}

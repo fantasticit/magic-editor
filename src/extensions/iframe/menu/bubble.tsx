@@ -8,6 +8,7 @@ import { IconEdit, IconVisitlink } from "../../../icons";
 import { Iframe as IframeExtension } from "../iframe";
 
 import { showURLEditor } from "./edit";
+import i18n from "../../../i18n";
 
 interface IProps {
   editor: Editor;
@@ -39,11 +40,11 @@ export const IframeBubbleMenu: React.FC<IProps> = ({ editor }) => {
     <BubbleMenu editor={editor} shouldShow={shouldShow} forNode>
       <div ref={containerRef}>
         <Space spacing={4}>
-          <Tooltip editor={editor} title="访问链接">
+          <Tooltip editor={editor} title={i18n('iframe', 'visit')}>
             <Button size="small" icon={<IconVisitlink />} onClick={visitLink} />
           </Tooltip>
 
-          <Tooltip editor={editor} title="编辑链接">
+          <Tooltip editor={editor} title={i18n('iframe', 'edit')}>
             <Button
               size="small"
               icon={<IconEdit />}

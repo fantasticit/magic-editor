@@ -6,6 +6,7 @@ import { Dropdown, Button, Tooltip } from "../../../../components";
 import { IconPriority } from "../../../../icons";
 
 import { PRIORITIES } from "../constant";
+import i18n from "../../../../i18n";
 
 export const Priority = ({ editor, selectedNode, setPriority }) => {
   return (
@@ -23,7 +24,7 @@ export const Priority = ({ editor, selectedNode, setPriority }) => {
         </Dropdown.Menu>
       }>
       <span>
-        <Tooltip editor={editor} title="优先级" zLevel="highest">
+        <Tooltip editor={editor} title={i18n('mind', 'priority')} zLevel="highest">
           <Button
             size="small"
             disabled={!selectedNode}

@@ -4,6 +4,7 @@ import { Dropdown, Button, Tooltip } from "../../../../components";
 import { IconProgress } from "../../../../icons";
 
 import { PROGRESSES } from "../constant";
+import i18n from "../../../../i18n";
 
 export const Progress = ({ editor, selectedNode, setProgress }) => {
   return (
@@ -23,7 +24,7 @@ export const Progress = ({ editor, selectedNode, setProgress }) => {
         </Dropdown.Menu>
       }>
       <span>
-        <Tooltip editor={editor} title="进度" zLevel="highest">
+        <Tooltip editor={editor} title={i18n('mind', 'setProgress')} zLevel="highest">
           <Button
             size="small"
             disabled={!selectedNode}

@@ -8,6 +8,7 @@ import { Row, Col, Button, Input } from "../../../components";
 import { Iframe as IframeExtension } from "../iframe";
 import { isNodeActive } from "../../../utilities";
 import { getEditorTheme } from "../../../editor/theme";
+import i18n from "../../../i18n";
 
 export const URLEditor: React.FC<{
   url: string;
@@ -38,7 +39,7 @@ export const URLEditor: React.FC<{
     <div style={{ width: 280 }}>
       <Row style={{ marginTop: 8 }}>
         <Col span={4} style={{ paddingTop: "4px" }}>
-          链接
+          {i18n('iframe', 'title')}
         </Col>
         <Col span={20}>
           <Input
@@ -50,10 +51,10 @@ export const URLEditor: React.FC<{
       </Row>
       <Row style={{ marginTop: 8 }}>
         <Button onClick={ok} disabled={!url} type="primary">
-          确定
+          {i18n('iframe', 'save')}
         </Button>
         <Button style={{ marginLeft: 8 }} onClick={onCancel}>
-          取消
+          {i18n('iframe', 'cancel')}
         </Button>
       </Row>
     </div>
