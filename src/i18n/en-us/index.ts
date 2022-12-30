@@ -1,5 +1,5 @@
 const locale = {
-  target: ['en', 'en_US', 'en-GB'],
+  target: ['en', 'en-US', 'en-GB'],
   lang:'en',
   country:'US',
   components: {
