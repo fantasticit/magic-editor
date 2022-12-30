@@ -74,6 +74,7 @@ const locale = {
     divide: 'Divide Cell',
   },
   align: {
+    title: 'Align',
     left: 'Align Left',
     center: 'Align Center',
     right: 'Align Right',

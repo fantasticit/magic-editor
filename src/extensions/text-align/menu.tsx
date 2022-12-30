@@ -109,7 +109,7 @@ const _TextAlignStaticMenu: React.FC<{
 
   return (
     <span ref={containerRef}>
-      <Tooltip editor={editor} title="对齐方式">
+      <Tooltip editor={editor} title={i18n('align', 'title')}>
         <Button
           icon={current}
           onClick={() => {

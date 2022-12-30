@@ -74,6 +74,7 @@ const locale = {
     divide: '분할',
   },
   align: {
+    title: '정렬',
     left: '왼쪽',
     center: '가운데',
     right: '오른쪽',

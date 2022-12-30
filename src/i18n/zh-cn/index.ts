@@ -74,6 +74,7 @@ const locale = {
     divide: '分栏',
   },
   align: {
+    title: '对齐方式',
     left: '左对齐',
     center: '居中',
     right: '右对齐',
