@@ -2,12 +2,13 @@ import React from "react";
 
 import { Button, Popover } from "../../../../components";
 import { IconHelpCircle } from "../../../../icons";
+import i18n from "../../../../i18n";
 
 const HELP_MESSAGE = [
-  { key: "新增同级节点", value: "Enter 键" },
-  { key: "新增子节点", value: "Tab 键" },
-  { key: "编辑节点文字", value: "双击节点" },
-  { key: "编辑节点菜单", value: "在节点右键" }
+  { key: i18n('mind', 'help', 'addSame'), value: i18n('mind', 'help', 'addSameHelp') },
+  { key: i18n('mind', 'help', 'addChild'), value: i18n('mind', 'help', 'addChildHelp') },
+  { key: i18n('mind', 'help', 'editText'), value: i18n('mind', 'help', 'editTextHelp') },
+  { key: i18n('mind', 'help', 'editMenu'), value: i18n('mind', 'help', 'editMenuHelp') }
 ];
 
 const HELP_MESSAGE_STYLE = {

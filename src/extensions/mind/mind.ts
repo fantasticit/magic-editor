@@ -5,9 +5,10 @@ import { NodeSelection } from "../../prosemirror";
 import { isNodeEmpty } from "../../utilities";
 
 import { MindView } from "./mind-view";
+import i18n from "../../i18n";
 
 export const DEFAULT_MIND_DATA = JSON.stringify({
-  root: { data: { text: "中心节点" }, children: [] },
+  root: { data: { text: i18n('mind', 'root') }, children: [] },
   template: "default",
   theme: "fresh-purple",
   version: "1.4.43"

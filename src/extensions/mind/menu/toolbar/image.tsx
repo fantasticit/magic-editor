@@ -2,6 +2,7 @@ import React from "react";
 
 import { Dropdown, Button, Tooltip, Upload } from "../../../../components";
 import { IconImage } from "../../../../icons";
+import i18n from "../../../../i18n";
 
 export const Image = ({ editor, disabled, image, setImage }) => {
   return (
@@ -16,7 +17,7 @@ export const Image = ({ editor, disabled, image, setImage }) => {
         </div>
       }>
       <span style={{ display: "inline-block" }}>
-        <Tooltip editor={editor} title="设置图片" zLevel="highest">
+        <Tooltip editor={editor} title={i18n('mind', 'image')} zLevel="highest">
           <Button disabled={disabled} icon={<IconImage />} />
         </Tooltip>
       </span>

@@ -1,13 +1,15 @@
+import i18n from "../../../i18n";
+
 const getProgressTitle = index => {
   switch (index) {
     case 0:
-      return "移除进度";
+      return i18n('mind', 'progressRemove');
     case 1:
-      return "未开始";
+      return i18n('mind', 'progressStart');
     case 9:
-      return "全部完成";
+      return i18n('mind', 'progressDone');
     default:
-      return "完成" + (index - 1) + "/8";
+      return i18n('mind', 'progress') + (index - 1) + "/8";
   }
 };
 
@@ -20,7 +22,7 @@ export const PROGRESSES = Array.from({ length: 10 }, (_, i) => {
 
 export const PRIORITIES = [
   {
-    text: "移除优先级",
+    text: i18n('mind', 'removePriority'),
     value: 0
   },
   ...Array.from({ length: 9 }, (_, i) => {
@@ -33,34 +35,34 @@ export const PRIORITIES = [
 
 export const TEMPLATES = [
   {
-    label: "经典",
+    label: i18n('mind', 'template', 'default'),
     value: "default"
   },
   {
-    label: "文件夹",
+    label: i18n('mind', 'template', 'fileTree'),
     value: "filetree"
   },
   {
-    label: "鱼骨图",
+    label: i18n('mind', 'template', 'fishBone'),
     value: "fish-bone"
   },
   {
-    label: "靠右",
+    label: i18n('mind', 'template', 'right'),
     value: "right"
   },
   {
-    label: "组织",
+    label: i18n('mind', 'template', 'structure'),
     value: "structure"
   },
   {
-    label: "天盘",
+    label: i18n('mind', 'template', 'tianpan'),
     value: "tianpan"
   }
 ];
 
 export const THEMES = [
   {
-    label: "经典",
+    label: i18n('mind', 'theme', 'default'),
     value: "classic",
     style: {
       color: "rgb(68, 51, 0)",
@@ -68,7 +70,7 @@ export const THEMES = [
     }
   },
   {
-    label: "紧凑",
+    label: i18n('mind', 'theme', 'classicCompact'),
     value: "classic-compact",
     style: {
       color: "rgb(68, 51, 0)",
@@ -76,7 +78,7 @@ export const THEMES = [
     }
   },
   {
-    label: "清新红",
+    label: i18n('mind', 'theme', 'freshRed'),
     value: "fresh-red",
     style: {
       color: "white",
@@ -84,7 +86,7 @@ export const THEMES = [
     }
   },
   {
-    label: "泥土黄",
+    label: i18n('mind', 'theme', 'freshSoil'),
     value: "fresh-soil",
     style: {
       color: "white",
@@ -92,7 +94,7 @@ export const THEMES = [
     }
   },
   {
-    label: "文艺绿",
+    label: i18n('mind', 'theme', 'freshGreen'),
     value: "fresh-green",
     style: {
       color: "white",
@@ -100,7 +102,7 @@ export const THEMES = [
     }
   },
   {
-    label: "天空蓝",
+    label: i18n('mind', 'theme', 'freshBlue'),
     value: "fresh-blue",
     style: {
       color: "white",
@@ -108,7 +110,7 @@ export const THEMES = [
     }
   },
   {
-    label: "浪漫紫",
+    label: i18n('mind', 'theme', 'freshPurple'),
     value: "fresh-purple",
     style: {
       color: "white",
@@ -116,7 +118,7 @@ export const THEMES = [
     }
   },
   {
-    label: "胭脂粉",
+    label: i18n('mind', 'theme', 'freshPink'),
     value: "fresh-pink",
     style: {
       color: "white",
@@ -124,7 +126,7 @@ export const THEMES = [
     }
   },
   {
-    label: "冷光",
+    label: i18n('mind', 'theme', 'snow'),
     value: "snow",
     style: {
       color: "#fff",
@@ -132,7 +134,7 @@ export const THEMES = [
     }
   },
   {
-    label: "鱼骨图",
+    label: i18n('mind', 'theme', 'fish'),
     value: "fish",
     style: {
       color: "#fff",

@@ -22,6 +22,7 @@ import {
 import { copyNode, deleteNode } from "../../../utilities";
 
 import { Columns } from "../columns";
+import i18n from "../../../i18n";
 
 export const ColumnsBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const shouldShow = useCallback<BubbleMenuProps["shouldShow"]>(() => {
@@ -87,13 +88,13 @@ export const ColumnsBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
       shouldShow={shouldShow}
       tippyOptions={{ getReferenceClientRect }}>
       <Space spacing={2}>
-        <Tooltip editor={editor} title="复制">
+        <Tooltip editor={editor} title={i18n('copy')}>
           <Button onClick={copyMe} icon={<IconCopy />} size="small" />
         </Tooltip>
 
         <Divider />
 
-        <Tooltip editor={editor} title="向前插入一列">
+        <Tooltip editor={editor} title={i18n('table', 'insertColumnLeft')}>
           <Button
             onClick={addColBefore}
             icon={<IconAddColumnBefore />}
@@ -101,7 +102,7 @@ export const ColumnsBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="向后插入一列">
+        <Tooltip editor={editor} title={i18n('table', 'insertColumnRight')}>
           <Button
             onClick={addColAfter}
             icon={<IconAddColumnAfter />}
@@ -109,7 +110,7 @@ export const ColumnsBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="删除当前列">
+        <Tooltip editor={editor} title={i18n('table', 'removeColumns')}>
           <Button
             onClick={deleteCol}
             icon={<IconDeleteColumn />}
@@ -119,7 +120,7 @@ export const ColumnsBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
 
         <Divider />
 
-        <Tooltip editor={editor} title="删除">
+        <Tooltip editor={editor} title={i18n('delete')}>
           <Button size="small" icon={<IconDelete />} onClick={deleteMe} />
         </Tooltip>
       </Space>

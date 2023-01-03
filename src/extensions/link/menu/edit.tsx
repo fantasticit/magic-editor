@@ -1,30 +1,31 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import ReactDOM from "react-dom";
-import { Editor, getMarkRange, posToDOMRect } from "@tiptap/core";
-import tippy, { Instance } from "tippy.js";
-import { ThemeProvider } from "styled-components";
+import {Editor, getMarkRange, posToDOMRect} from "@tiptap/core";
+import tippy, {Instance} from "tippy.js";
+import {ThemeProvider} from "styled-components";
 
-import { Row, Col, Button, Input } from "../../../components";
-import { isMarkActive } from "../../../utilities/mark";
-import { Link as LinkExtension } from "../link";
-import { getEditorTheme } from "../../../editor/theme";
+import {Row, Col, Button, Input} from "../../../components";
+import {isMarkActive} from "../../../utilities/mark";
+import {Link as LinkExtension} from "../link";
+import {getEditorTheme} from "../../../editor/theme";
+import i18n from "../../../i18n";
 
 export const LinkEdit: React.FC<{
   text: string;
   href: string;
   onOk: (arg: { text: string; href: string }) => void;
   onCancel: () => void;
-}> = ({ text: defaultText, href: defaultHref, onOk, onCancel }) => {
+}> = ({text: defaultText, href: defaultHref, onOk, onCancel}) => {
   const linkInputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState(defaultText);
   const [href, setHref] = useState(defaultHref);
 
   const ok = useCallback(() => {
     onOk &&
-      onOk({
-        text: text || href,
-        href
-      });
+    onOk({
+      text: text || href,
+      href
+    });
   }, [onOk, text, href]);
 
   useEffect(() => {
@@ -38,18 +39,18 @@ export const LinkEdit: React.FC<{
   }, []);
 
   return (
-    <div style={{ width: 280 }}>
+    <div style={{width: 280}}>
       <Row>
-        <Col span={4} style={{ paddingTop: "4px" }}>
-          文本
+        <Col span={4} style={{paddingTop: "4px"}}>
+          {i18n('link', 'text')}
         </Col>
         <Col span={20}>
-          <Input value={text} onChange={value => setText(value)} />
+          <Input value={text} onChange={value => setText(value)}/>
         </Col>
       </Row>
-      <Row style={{ marginTop: 8 }}>
-        <Col span={4} style={{ paddingTop: "4px" }}>
-          链接
+      <Row style={{marginTop: 8}}>
+        <Col span={4} style={{paddingTop: "4px"}}>
+          {i18n('link', 'url')}
         </Col>
         <Col span={20}>
           <Input
@@ -59,12 +60,12 @@ export const LinkEdit: React.FC<{
           />
         </Col>
       </Row>
-      <Row style={{ marginTop: 8 }}>
+      <Row style={{marginTop: 8}}>
         <Button onClick={ok} disabled={!href} type="primary">
-          确定
+          {i18n('link', 'save')}
         </Button>
-        <Button style={{ marginLeft: 8 }} onClick={onCancel}>
-          取消
+        <Button style={{marginLeft: 8}} onClick={onCancel}>
+          {i18n('link', 'cancel')}
         </Button>
       </Row>
     </div>
@@ -72,7 +73,7 @@ export const LinkEdit: React.FC<{
 };
 
 export const showLinkEditor = (editor: Editor, dom?: HTMLElement) => {
-  const { view, state } = editor;
+  const {view, state} = editor;
   // @ts-ignore
   const isInLink = isMarkActive(state.schema.marks.link)(state);
   const selection = state.selection;
@@ -83,13 +84,13 @@ export const showLinkEditor = (editor: Editor, dom?: HTMLElement) => {
   let href;
 
   if (!isInLink) {
-    const { from, to } = selection;
+    const {from, to} = selection;
     start = from;
     end = to;
     text = state.doc.textBetween(start, end);
     href = "";
   } else {
-    const { from } = editor.state.selection;
+    const {from} = editor.state.selection;
     const range = getMarkRange(
       editor.state.doc.resolve(from),
       editor.state.schema.marks.link
@@ -118,10 +119,10 @@ export const showLinkEditor = (editor: Editor, dom?: HTMLElement) => {
         text={text}
         href={href}
         onOk={values => {
-          const { view } = editor;
+          const {view} = editor;
           const schema = view.state.schema;
           const node = schema.text(values.text, [
-            schema.marks.link.create({ href: values.href })
+            schema.marks.link.create({href: values.href})
           ]);
           view.dispatch(view.state.tr.deleteRange(start, end));
           view.dispatch(view.state.tr.insert(start, node));

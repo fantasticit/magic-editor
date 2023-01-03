@@ -10,6 +10,7 @@ import { load, renderMind } from "./kityminder";
 import { Toolbar } from "./toolbar";
 import { findNodeByBlockId } from "../../../utilities";
 import { Mind } from "../mind";
+import i18n from "../../../i18n";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -138,11 +139,11 @@ export const MindSettingModal: React.FC<IProps> = ({
   return (
     <Modal
       centered
-      title="思维导图"
+      title={i18n("mind", "title")}
       fullScreen
       visible={visible}
-      okText="保存"
-      cancelText="退出"
+      okText={i18n('save')}
+      cancelText={i18n('cancel')}
       motion={false}
       header={
         <StyledHeader>
@@ -150,20 +151,20 @@ export const MindSettingModal: React.FC<IProps> = ({
             <StyledIconContainer>
               <IconMind />
             </StyledIconContainer>
-            <strong>思维导图</strong>
+            <strong>{i18n("mind", "title")}</strong>
           </Space>
           <Space>
             <Button type="primary" onClick={save}>
-              保存
+              {i18n('save')}
             </Button>
-            <Button onClick={saveAndExit}>保存并退出</Button>
+            <Button onClick={saveAndExit}>{i18n('saveAndExit')}</Button>
           </Space>
         </StyledHeader>
       }
       footer={null}>
       <StyledMindEditorContainer>
         {loading && <Loading></Loading>}
-        {error && <span>{(error && error.message) || "未知错误"}</span>}
+        {error && <span>{(error && error.message) || i18n('error')}</span>}
 
         <StyledToolbarContainer>
           <Toolbar editor={editor} mind={mind} />

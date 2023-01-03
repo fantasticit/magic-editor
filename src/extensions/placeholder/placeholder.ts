@@ -7,6 +7,7 @@ import {
   Decoration,
   DecorationSet
 } from "../../prosemirror";
+import i18n from "../../i18n";
 
 export interface PlaceholderOptions {
   emptyEditorClass: string;
@@ -32,7 +33,7 @@ export const Placeholder = Extension.create<PlaceholderOptions>({
     return {
       emptyEditorClass: "is-editor-empty",
       emptyNodeClass: "is-empty",
-      placeholder: "Write something …",
+      placeholder: i18n('placeholder'),
       showOnlyWhenEditable: true,
       showOnlyCurrent: true,
       includeChildren: true,

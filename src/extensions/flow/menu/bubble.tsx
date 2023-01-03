@@ -13,6 +13,7 @@ import { copyNode, deleteNode } from "../../../utilities";
 import { IFlowAttrs, Flow } from "../flow";
 
 import { showFlowEditor } from "./edit";
+import i18n from "../../../i18n";
 
 export const FlowBubbleMenu = ({ editor }) => {
   const attrs = useAttributes<IFlowAttrs>(editor, Flow.name, {
@@ -39,17 +40,17 @@ export const FlowBubbleMenu = ({ editor }) => {
       shouldShow={shouldShow}
       forNode>
       <Space spacing={4}>
-        <Tooltip editor={editor} title="复制">
+        <Tooltip editor={editor} title={i18n('copy')}>
           <Button onClick={copyMe} icon={<IconCopy />} size="small" />
         </Tooltip>
 
-        <Tooltip editor={editor} title="编辑">
+        <Tooltip editor={editor} title={i18n('edit')}>
           <Button size="small" icon={<IconEdit />} onClick={openEditModal} />
         </Tooltip>
 
         <Divider />
 
-        <Tooltip editor={editor} title="删除">
+        <Tooltip editor={editor} title={i18n('delete')}>
           <Button onClick={deleteMe} icon={<IconDelete />} size="small" />
         </Tooltip>
       </Space>

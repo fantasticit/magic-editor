@@ -4,6 +4,8 @@ import { Dropdown } from "../";
 
 import { StyledEmptyWrap, StyledColorWrap, StyledColorItemWrap } from "./style";
 
+import i18n from "../../i18n";
+
 const colors = [
   "#000000",
   "#262626",
@@ -81,7 +83,7 @@ export const ColorPicker: React.FC<{
   title?: string;
   onSetColor: (arg: string | null) => void;
   disabled?: boolean;
-}> = ({ children, title = "颜色管理", onSetColor, disabled = false }) => {
+}> = ({ children, title = i18n('colorConfig'), onSetColor, disabled = false }) => {
   const [visible, toggleVisible] = useState(false);
 
   const content = useMemo(
@@ -94,7 +96,7 @@ export const ColorPicker: React.FC<{
           }}>
           <StyledEmptyWrap onClick={() => onSetColor(null)}>
             <span></span>
-            <span>无颜色</span>
+            <span>{i18n('components', 'colorPicker', 'transparent')}</span>
           </StyledEmptyWrap>
 
           <StyledColorWrap>

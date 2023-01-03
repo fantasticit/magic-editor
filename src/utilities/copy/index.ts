@@ -7,11 +7,12 @@ import {
   Slice,
   __serializeForClipboard
 } from "../../prosemirror";
+import i18n from "../../i18n";
 
 const _copy = require("./copy-to-clipboard");
 
 export function copy(text: string | { text: string; format: string }[]) {
-  return _copy(text, () => Toast.success("复制成功"));
+  return _copy(text, () => Toast.success(i18n('copyDone')));
 }
 
 export const copyNode = (editor: Editor, extensionName: string) => {

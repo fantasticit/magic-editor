@@ -4,6 +4,7 @@ import { Editor } from "@tiptap/core";
 import { Button, Input } from "./";
 import { getEditorProvider } from "../editor/provider";
 import { fileOpen } from "browser-fs-access";
+import i18n from "../i18n";
 
 interface Props {
   editor: Editor;
@@ -27,9 +28,9 @@ export const Upload: React.FC<React.PropsWithChildren<Props>> = ({
 
   return (
     <div>
-      <Input placeholder={"请输入图片地址"} onChange={onOK} />
+      <Input placeholder={i18n('image', 'set')} onChange={onOK} />
       <Button type="primary" onClick={getFile} style={{ marginTop: 12 }}>
-        上传本地图片
+        {i18n('image', 'upload')}
       </Button>
     </div>
   );

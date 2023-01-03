@@ -10,6 +10,7 @@ import { IconMindTemplate } from "../../../../icons";
 
 import { TEMPLATES } from "../constant";
 import { StyledSection } from "./styled";
+import i18n from "../../../../i18n";
 
 export const Template = ({ editor, template, setTemplate }) => {
   return (
@@ -37,7 +38,7 @@ export const Template = ({ editor, template, setTemplate }) => {
         </StyledSection>
       }>
       <span>
-        <Tooltip editor={editor} title="布局" zLevel="highest">
+        <Tooltip editor={editor} title={i18n('mind', 'place')} zLevel="highest">
           <Button icon={<IconMindTemplate />} size="small" />
         </Tooltip>
       </span>

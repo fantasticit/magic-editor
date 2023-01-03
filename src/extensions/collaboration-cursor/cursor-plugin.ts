@@ -11,6 +11,7 @@ import {
 
 import * as math from "lib0/math";
 import { EditorState, PMNode } from "../../prosemirror";
+import i18n from "../../i18n";
 
 const findNodeAt = (state: EditorState, from: number, to: number) => {
   let target: PMNode | null = null;
@@ -150,7 +151,7 @@ export const createDecorations = (
               nodeName: "div",
               class: "collaboration-cursor-block",
               style: `outline: 1px solid ${user.color}`,
-              "data-name": `${user.name}正在编辑中`,
+              "data-name": `${user.name}${i18n('editing')}`,
               "data-color": user.color
             })
           );

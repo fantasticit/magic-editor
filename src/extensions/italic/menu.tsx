@@ -6,6 +6,7 @@ import { IconItalic } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { Italic as ItalicExtension } from "./italic";
+import i18n from "../../i18n";
 
 export const ItalicStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isItalicActive = useActive(editor, ItalicExtension.name);
@@ -21,7 +22,7 @@ export const ItalicStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   );
 
   return (
-    <Tooltip title="斜体" editor={editor}>
+    <Tooltip title={i18n('style', 'italic')} editor={editor}>
       <Button
         icon={<IconItalic />}
         onClick={toggleItalic}

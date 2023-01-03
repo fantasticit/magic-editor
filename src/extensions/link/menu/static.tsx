@@ -6,6 +6,7 @@ import { IconLink } from "../../../icons";
 import { useActive } from "../../../hooks/use-active";
 import { Link as LinkExtension } from "../link";
 import { showLinkEditor } from "./edit";
+import i18n from "../../../i18n";
 
 export const LinkStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isLinkActive = useActive(editor, LinkExtension.name);
@@ -15,7 +16,7 @@ export const LinkStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   }, [editor]);
 
   return (
-    <Tooltip title="链接" editor={editor}>
+    <Tooltip title={i18n('link', 'title')} editor={editor}>
       <Button icon={<IconLink />} onClick={toggleLink} active={isLinkActive} />
     </Tooltip>
   );

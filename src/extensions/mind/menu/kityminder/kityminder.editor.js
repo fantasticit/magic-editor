@@ -1549,7 +1549,7 @@
             action: function() {
               if (command.indexOf("Append") === 0) {
                 AppendLock++;
-                minder.execCommand(command, "分支主题");
+                minder.execCommand(command, window.__me_i18n('mind', 'subNode'));
                 // provide in input runtime
                 function afterAppend() {
                   if (!--AppendLock) {

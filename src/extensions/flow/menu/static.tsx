@@ -7,6 +7,7 @@ import { useActive } from "../../../hooks/use-active";
 import { Flow as FlowExtension } from "../flow";
 
 import { showFlowEditor } from "./edit";
+import i18n from "../../../i18n";
 
 export const FlowStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isActive = useActive(editor, FlowExtension.name);
@@ -16,7 +17,7 @@ export const FlowStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   }, [editor]);
 
   return (
-    <Tooltip title="流程图" editor={editor}>
+    <Tooltip title={i18n('flow', 'title')} editor={editor}>
       <Button icon={<IconFlow />} onClick={showEditor} active={isActive} />
     </Tooltip>
   );

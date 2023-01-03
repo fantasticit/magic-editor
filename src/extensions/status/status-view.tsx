@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { getEditorProvider } from "../../editor/provider";
 import { Input, Popover, Space, Tag } from "../../components";
 import { IconCheck } from "../../icons";
+import i18n from "../../i18n";
 
 const StyledTag = styled.span`
   font-size: 12px;
@@ -57,7 +58,7 @@ export const StatusView: React.FC<NodeViewProps> = ({
       }}
       onClick={() => toggleVisible(true)}>
       <span style={{ color: currentColor }}>
-        {currentText || "请设置状态内容"}
+        {currentText || i18n("status", "placeholder")}
       </span>
     </StyledTag>
   );
@@ -123,7 +124,7 @@ export const StatusView: React.FC<NodeViewProps> = ({
               <div style={{ marginBottom: 8 }}>
                 <Input
                   ref={ref}
-                  placeholder="输入状态"
+                  placeholder={i18n("status", "input")}
                   value={currentText}
                   onChange={setCurrentText}
                 />

@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { Resizable } from "../../components";
 import { NodeSelection } from "../../prosemirror";
+import i18n from "../../i18n";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -77,7 +78,7 @@ export const IframeView: React.FC<NodeViewProps> = ({
             <iframe ref={iframeRef} src={url}></iframe>
           ) : (
             <StyledEmptyContainer>
-              <span>请设置外链地址</span>
+              <span>{i18n('iframe', 'set')}</span>
             </StyledEmptyContainer>
           )}
         </StyledContainer>

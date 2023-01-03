@@ -7,6 +7,7 @@ import { IconEdit } from "../../../icons";
 import { Excalidraw as ExcalidrawExtension } from "../excalidraw";
 
 import { showExcalidrawEditor } from "./edit";
+import i18n from "../../../i18n";
 
 interface IProps {
   editor: Editor;
@@ -25,7 +26,7 @@ export const ExcalidrawBubbleMenu: React.FC<IProps> = ({ editor }) => {
   return (
     <BubbleMenu editor={editor} shouldShow={shouldShow} forNode>
       <Space spacing={4}>
-        <Tooltip editor={editor} title="编辑绘图">
+        <Tooltip editor={editor} title={i18n('draw', 'edit')}>
           <Button size="small" icon={<IconEdit />} onClick={openEditModal} />
         </Tooltip>
       </Space>

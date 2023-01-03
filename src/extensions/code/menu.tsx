@@ -6,6 +6,7 @@ import { IconCode } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { Code as CodeExtension } from "./code";
+import i18n from "../../i18n";
 
 export const CodeStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isCodeActive = useActive(editor, CodeExtension.name);
@@ -21,7 +22,7 @@ export const CodeStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   );
 
   return (
-    <Tooltip title="行内代码" editor={editor}>
+    <Tooltip title={i18n('inlineCode')} editor={editor}>
       <Button icon={<IconCode />} onClick={toggleCode} active={isCodeActive} />
     </Tooltip>
   );

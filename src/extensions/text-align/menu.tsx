@@ -13,6 +13,7 @@ import {
 import { useActive } from "../../hooks/use-active";
 import { TextAlign } from "./text-align";
 import { ZINDEX_DEFAULT } from "../../constants";
+import i18n from "../../i18n";
 
 const _TextAlignStaticMenu: React.FC<{
   editor: Editor;
@@ -61,19 +62,19 @@ const _TextAlignStaticMenu: React.FC<{
 
     ReactDOM.render(
       <>
-        <Tooltip editor={editor} title="左对齐">
+        <Tooltip editor={editor} title={i18n('align', 'left')}>
           <Button onClick={toggle("left")} icon={<IconAlignLeft />} />
         </Tooltip>
 
-        <Tooltip editor={editor} title="居中">
+        <Tooltip editor={editor} title={i18n('align', 'center')}>
           <Button onClick={toggle("center")} icon={<IconAlignCenter />} />
         </Tooltip>
 
-        <Tooltip editor={editor} title="右对齐">
+        <Tooltip editor={editor} title={i18n('align', 'right')}>
           <Button onClick={toggle("right")} icon={<IconAlignRight />} />
         </Tooltip>
 
-        <Tooltip editor={editor} title="两端对齐">
+        <Tooltip editor={editor} title={i18n('align', 'justify')}>
           <Button onClick={toggle("justify")} icon={<IconAlignJustify />} />
         </Tooltip>
       </>,
@@ -108,7 +109,7 @@ const _TextAlignStaticMenu: React.FC<{
 
   return (
     <span ref={containerRef}>
-      <Tooltip editor={editor} title="对齐方式">
+      <Tooltip editor={editor} title={i18n('align', 'title')}>
         <Button
           icon={current}
           onClick={() => {

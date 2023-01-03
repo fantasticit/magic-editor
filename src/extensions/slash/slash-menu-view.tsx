@@ -10,6 +10,7 @@ import scrollIntoView from "scroll-into-view-if-needed";
 import styled from "styled-components";
 
 import { SlashMenuItem } from "./slash";
+import i18n from "../../i18n";
 
 interface IProps {
   editor: Editor;
@@ -143,7 +144,7 @@ export const SlashMenuView: React.FC<IProps> = forwardRef((props, ref) => {
           );
         })
       ) : (
-        <StyledTitle>没有找到结果</StyledTitle>
+        <StyledTitle>{i18n('notfound')}</StyledTitle>
       )}
     </StyledContainer>
   );

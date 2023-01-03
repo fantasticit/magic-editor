@@ -9721,7 +9721,7 @@
         }
         if (!node) return;
         if (/^\s*$/.test(node.data.text)) {
-          node.data.text = "分支主题";
+          node.data.text = window.__me_i18n('mind', 'subNode');
         }
         return encode(exportNode(node));
       }

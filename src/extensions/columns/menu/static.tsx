@@ -6,6 +6,7 @@ import { IconColumns } from "../../../icons";
 import { useActive } from "../../../hooks/use-active";
 
 import { Columns as ColumnsExtension } from "../columns";
+import i18n from "../../../i18n";
 
 export const ColumnsStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isColumnsActive = useActive(editor, ColumnsExtension.name);
@@ -21,7 +22,7 @@ export const ColumnsStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   );
 
   return (
-    <Tooltip title="分栏" editor={editor}>
+    <Tooltip title={i18n('table', 'divide')} editor={editor}>
       <Button
         icon={<IconColumns />}
         onClick={insertColumns}

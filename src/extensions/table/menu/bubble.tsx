@@ -29,6 +29,7 @@ import {
 import { copyNode, deleteNode } from "../../../utilities";
 
 import { Table } from "../table";
+import i18n from "../../../i18n";
 
 export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const shouldShow = useCallback<BubbleMenuProps["shouldShow"]>(() => {
@@ -164,13 +165,13 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
       shouldShow={shouldShow}
       tippyOptions={{ getReferenceClientRect, offset: [0, -2] }}>
       <Space spacing={2}>
-        <Tooltip editor={editor} title="复制">
+        <Tooltip editor={editor} title={i18n('copy')}>
           <Button onClick={copyMe} icon={<IconCopy />} size="small" />
         </Tooltip>
 
         <Divider />
 
-        <Tooltip editor={editor} title="向前插入一列">
+        <Tooltip editor={editor} title={i18n('table', 'insertColumnLeft')}>
           <Button
             onClick={addColumnBefore}
             icon={<IconAddColumnBefore />}
@@ -178,14 +179,14 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="向后插入一列">
+        <Tooltip editor={editor} title={i18n('table', 'insertColumnRight')}>
           <Button
             onClick={addColumnAfter}
             icon={<IconAddColumnAfter />}
             size="small"
           />
         </Tooltip>
-        <Tooltip editor={editor} title="删除当前列">
+        <Tooltip editor={editor} title={i18n('table', 'removeColumns')}>
           <Button
             onClick={deleteColumn}
             icon={<IconDeleteColumn />}
@@ -195,7 +196,7 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
 
         <Divider />
 
-        <Tooltip editor={editor} title="向前插入一行">
+        <Tooltip editor={editor} title={i18n('table', 'insertRowUp')}>
           <Button
             onClick={addRowBefore}
             icon={<IconAddRowBefore />}
@@ -203,7 +204,7 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="向后插入一行">
+        <Tooltip editor={editor} title={i18n('table', 'insertRowDown')}>
           <Button
             onClick={addRowAfter}
             icon={<IconAddRowAfter />}
@@ -211,13 +212,13 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="删除当前行">
+        <Tooltip editor={editor} title={i18n('table', 'removeRows')}>
           <Button onClick={deleteRow} icon={<IconDeleteRow />} size="small" />
         </Tooltip>
 
         <Divider />
 
-        <Tooltip editor={editor} title="设置(或取消)当前列为表头">
+        <Tooltip editor={editor} title={i18n('table', 'toggleHeaderColumn')}>
           <Button
             size="small"
             icon={<IconTableHeaderColumn />}
@@ -225,7 +226,7 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="设置(或取消)当前行为表头">
+        <Tooltip editor={editor} title={i18n('table', 'toggleHeaderRow')}>
           <Button
             size="small"
             icon={<IconTableHeaderRow />}
@@ -233,7 +234,7 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
           />
         </Tooltip>
 
-        <Tooltip editor={editor} title="设置(或取消)当前单元格为表头">
+        <Tooltip editor={editor} title={i18n('table', 'toggleHeaderCell')}>
           <Button
             size="small"
             icon={<IconTableHeaderCell />}
@@ -243,17 +244,17 @@ export const TableBubbleMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
 
         <Divider />
 
-        <Tooltip editor={editor} title="合并单元格">
+        <Tooltip editor={editor} title={i18n('table', 'merge')}>
           <Button size="small" icon={<IconMergeCell />} onClick={mergeCells} />
         </Tooltip>
 
-        <Tooltip editor={editor} title="分离单元格">
+        <Tooltip editor={editor} title={i18n('table', 'split')}>
           <Button size="small" icon={<IconSplitCell />} onClick={splitCell} />
         </Tooltip>
 
         <Divider />
 
-        <Tooltip editor={editor} title="删除表格">
+        <Tooltip editor={editor} title={i18n('table', 'remove')}>
           <Button size="small" icon={<IconDeleteTable />} onClick={deleteMe} />
         </Tooltip>
       </Space>

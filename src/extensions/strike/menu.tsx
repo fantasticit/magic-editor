@@ -6,6 +6,7 @@ import { IconStrike } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 
 import { Strike as StrikeExtension } from "./strike";
+import i18n from "../../i18n";
 
 export const StrikeStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   const isStrikeActive = useActive(editor, StrikeExtension.name);
@@ -21,7 +22,7 @@ export const StrikeStaticMenu: React.FC<{ editor: Editor }> = ({ editor }) => {
   );
 
   return (
-    <Tooltip title="删除线" editor={editor}>
+    <Tooltip title={i18n('style', 'strike')} editor={editor}>
       <Button
         icon={<IconStrike />}
         onClick={toggleStrike}

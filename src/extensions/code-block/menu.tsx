@@ -5,6 +5,7 @@ import { Button, Tooltip } from "../../components";
 import { IconCodeBlock } from "../../icons";
 import { useActive } from "../../hooks/use-active";
 import { CodeBlock as CodeBlockExtension } from "./code-block";
+import i18n from "../../i18n";
 
 export const CodeBlockStaticMenu: React.FC<{ editor: Editor }> = ({
   editor
@@ -22,7 +23,7 @@ export const CodeBlockStaticMenu: React.FC<{ editor: Editor }> = ({
   );
 
   return (
-    <Tooltip title="代码块" editor={editor}>
+    <Tooltip title={i18n('codeBlock')} editor={editor}>
       <Button
         icon={<IconCodeBlock />}
         onClick={toggleCodeBlock}

@@ -6,6 +6,7 @@ import { IconMindTheme } from "../../../../icons";
 
 import { THEMES } from "../constant";
 import { StyledSection } from "./styled";
+import i18n from "../../../../i18n";
 
 export const Theme = ({ editor, theme, setTheme }) => {
   return (
@@ -17,7 +18,7 @@ export const Theme = ({ editor, theme, setTheme }) => {
       getPopupContainer={() => editor.options.element}
       content={
         <StyledSection>
-          <span>主题</span>
+          <span>{i18n('mind', 'subject')}</span>
           <div>
             <ul>
               {THEMES.map(item => {
@@ -35,7 +36,7 @@ export const Theme = ({ editor, theme, setTheme }) => {
         </StyledSection>
       }>
       <span>
-        <Tooltip editor={editor} title="主题" zLevel="highest">
+        <Tooltip editor={editor} title={i18n('mind', 'subject')} zLevel="highest">
           <Button icon={<IconMindTheme />} size="small" />
         </Tooltip>
       </span>
